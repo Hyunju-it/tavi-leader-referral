@@ -1,8 +1,5 @@
-import { availableFonts } from '../utils/fonts';
-
 export const commands = {
-  help: "Available commands: [help, fonts, font <fontname>, about, stars, clear, loading, hi, love, journey, legacy, impact, mentor, quote, thankyou, leader, recommend, epilogue, thanks, sorry, tmi, farewell]",
-  fonts: `Available fonts: [${availableFonts.join(', ')}]`,
+  help: "Available commands: [help, about, stars, clear, loading, hi, love, journey, legacy, impact, mentor, quote, thankyou, leader, recommend, epilogue, thanks, sorry, tmi, farewell]",
   about: "This is a fake CLI running inside your browser 🌌",
   stars: "✨✨✨ Look at the galaxy shine ✨✨✨",
   hi: "🙏 Thank you for being here. Your presence is appreciated!",

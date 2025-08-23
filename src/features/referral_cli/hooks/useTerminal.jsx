@@ -1,8 +1,11 @@
 
 import { useState, useCallback } from 'react';
 import { commands } from '../constants/commands';
+import { devCommands } from '../constants/devCommands';
 import { availableFonts } from '../utils/fonts';
 import { motion } from 'framer-motion';
+
+const allCommands = { ...commands, ...devCommands };
 
 export const useTerminal = () => {
   const [lines, setLines] = useState(['> Welcome to Gemini Web CLI ✨']);
@@ -26,7 +29,7 @@ export const useTerminal = () => {
       return;
     }
 
-    const output = commands[normalizedCmd] || `Command not found: ${normalizedCmd}`;
+    const output = allCommands[normalizedCmd] || `Command not found: ${normalizedCmd}`;
 
     if (output === "__CLEAR__") {
       setLines(['> Console cleared']);
