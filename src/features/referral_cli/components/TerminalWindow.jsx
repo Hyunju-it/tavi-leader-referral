@@ -11,7 +11,7 @@ export default function TerminalWindow(props) {
           <span className="w-3 h-3 bg-[#ffbd2e] rounded-full"></span>
           <span className="w-3 h-3 bg-[#27c93f] rounded-full"></span>
         </div>
-        <span className="text-xs text-gray-300">Terminal — gemini</span>
+        <span className="text-xs text-gray-300">Terminal — TAVI</span>
       </div>
 
       <TerminalOutput {...props} />

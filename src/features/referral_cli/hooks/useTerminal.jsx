@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const allCommands = { ...commands, ...devCommands };
 
 export const useTerminal = () => {
-  const [lines, setLines] = useState(['> Welcome to Gemini Web CLI ✨']);
+  const [lines, setLines] = useState(['> Welcome to TAVI Web CLI ✨']);
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
   const [loading, setLoading] = useState(false);
