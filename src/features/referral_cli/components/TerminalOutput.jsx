@@ -40,8 +40,8 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.2 }}
         >
-          {typeof line === 'string' && line.startsWith('>') ? (
-            <span style={{ whiteSpace: 'pre-wrap' }}>{line}</span>
+          {typeof line === 'string' ? (
+            <span style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{line}</span>
           ) : (
             line
           )}

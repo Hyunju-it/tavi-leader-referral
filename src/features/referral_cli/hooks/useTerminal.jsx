@@ -1,6 +1,7 @@
 
 import { useState, useCallback } from 'react';
 import { commands } from '../constants/commands';
+import { availableFonts } from '../utils/fonts';
 import { motion } from 'framer-motion';
 
 export const useTerminal = () => {
@@ -8,9 +9,23 @@ export const useTerminal = () => {
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [font, setFont] = useState('Standard');
 
   const handleCommand = useCallback((cmd) => {
-    const normalizedCmd = cmd.normalize("NFC");
+    const [command, ...args] = cmd.split(' ');
+    const normalizedCmd = command.normalize("NFC");
+
+    if (normalizedCmd === 'font') {
+      const newFont = args[0];
+      if (availableFonts.includes(newFont)) {
+        setFont(newFont);
+        setLines((prev) => [...prev, `> ${cmd}`, `Font changed to ${newFont}`]);
+      } else {
+        setLines((prev) => [...prev, `> ${cmd}`, `Font not found: ${newFont}`]);
+      }
+      return;
+    }
+
     const output = commands[normalizedCmd] || `Command not found: ${normalizedCmd}`;
 
     if (output === "__CLEAR__") {
@@ -19,13 +34,11 @@ export const useTerminal = () => {
     }
 
     if (output === "__LOADING__") {
-      setLines((prev) => [...prev, `> ${normalizedCmd}`]);
+      setLines((prev) => [...prev, `> ${cmd}`]);
       setLoading(true);
 
       setTimeout(() => {
         setLoading(false);
-        // This part needs access to spinnerRef, which is a UI concern.
-        // We'll handle the visual feedback in the component itself.
         setLines((prev) => [...prev, "✔ Finished loading universe ✨"]);
       }, 3000);
       return;
@@ -73,20 +86,20 @@ export const useTerminal = () => {
           </div>
         </div>
       );
-      setLines((prev) => [...prev, `> ${normalizedCmd}`, journeyElement]);
+      setLines((prev) => [...prev, `> ${cmd}`, journeyElement]);
       return;
     }
 
     if (normalizedCmd === "hi") {
-      setLines((prev) => [...prev, `> ${normalizedCmd}`]);
+      setLines((prev) => [...prev, `> ${cmd}`]);
       setTypedOutput(commands["hi"]);
       return;
     }
 
-    setLines((prev) => [...prev, `> ${normalizedCmd}`, output]);
+    setLines((prev) => [...prev, `> ${cmd}`, output]);
   }, []);
 
-  const handleKeyDown = useCallback((e) => {
+  const onKeyDown = useCallback((e) => {
     if (e.key === "Enter") {
       const cmd = input.trim();
       if (cmd) handleCommand(cmd);
@@ -99,9 +112,10 @@ export const useTerminal = () => {
     input,
     loading,
     typedOutput,
+    font,
     setLines,
     setInput,
     setTypedOutput,
-    handleKeyDown,
+    onKeyDown,
   };
 };
