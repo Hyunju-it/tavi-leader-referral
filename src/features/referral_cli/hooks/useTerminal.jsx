@@ -1,11 +1,11 @@
 
 import { useState, useCallback } from 'react';
-import { commands } from '../constants/commands';
+import { commands as COMMANDS } from '../constants/commands';
 import { devCommands } from '../constants/devCommands';
 import { availableFonts } from '../utils/fonts';
 import { motion } from 'framer-motion';
 
-const allCommands = { ...commands, ...devCommands };
+const allCommands = { ...COMMANDS, ...devCommands };
 
 export const useTerminal = () => {
   const [lines, setLines] = useState(['> Welcome to TAVI Web CLI ✨']);
@@ -29,7 +29,18 @@ export const useTerminal = () => {
       return;
     }
 
-    const output = allCommands[normalizedCmd] || `Command not found: ${normalizedCmd}`;
+    const commandObj = allCommands[normalizedCmd];
+    let output;
+
+    if (commandObj) {
+      if (typeof commandObj.execute === 'function') {
+        output = commandObj.execute(...args);
+      } else {
+        output = commandObj;
+      }
+    } else {
+      output = `Command not found: ${normalizedCmd}`;
+    }
 
     if (output === "__CLEAR__") {
       setLines(['> Console cleared']);
@@ -95,7 +106,7 @@ export const useTerminal = () => {
 
     if (normalizedCmd === "hi") {
       setLines((prev) => [...prev, `> ${cmd}`]);
-      setTypedOutput(commands["hi"]);
+      setTypedOutput(COMMANDS["hi"]);
       return;
     }
 
