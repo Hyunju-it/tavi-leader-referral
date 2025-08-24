@@ -8,10 +8,9 @@ import { motion } from 'framer-motion';
 const allCommands = { ...COMMANDS, ...devCommands };
 
 export const useTerminal = () => {
-  const [lines, setLines] = useState(['> Welcome to TAVI Web CLI ✨']);
+  const [lines, setLines] = useState(['> Welcome to Seo Gwang-won Referral Web CLI ✨']);
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [font, setFont] = useState('Standard');
 
   const handleCommand = useCallback((cmd) => {
@@ -44,6 +43,17 @@ export const useTerminal = () => {
 
     if (output === "__CLEAR__") {
       setLines(['> Console cleared']);
+      return;
+    }
+
+    if (output === "__LOADING__") {
+      setLines((prev) => [...prev, `> ${cmd}`]);
+      setLoading(true);
+
+      setTimeout(() => {
+        setLoading(false);
+        setLines((prev) => [...prev, "✔ Finished loading universe ✨"]);
+      }, 3000);
       return;
     }
 
@@ -90,6 +100,12 @@ export const useTerminal = () => {
         </div>
       );
       setLines((prev) => [...prev, `> ${cmd}`, journeyElement]);
+      return;
+    }
+
+    if (normalizedCmd === "hi") {
+      setLines((prev) => [...prev, `> ${cmd}`]);
+      setTypedOutput(COMMANDS["hi"]);
       return;
     }
 

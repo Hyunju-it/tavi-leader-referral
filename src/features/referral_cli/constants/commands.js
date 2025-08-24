@@ -12,6 +12,14 @@ export const commands = {
     description: "This is a fake CLI running inside your browser 🌌",
     execute: () => "This is a fake CLI running inside your browser 🌌",
   },
+  stars: {
+    description: "✨✨✨ Look at the galaxy shine ✨✨✨",
+    execute: () => "✨✨✨ Look at the galaxy shine ✨✨✨",
+  },
+  hi: {
+    description: "🙏 Thank you for being here. Your presence is appreciated!",
+    execute: () => "🙏 Thank you for being here. Your presence is appreciated!",
+  },
   journey: {
     description: "__JOURNEY__",
     execute: () => "__JOURNEY__",
@@ -19,6 +27,10 @@ export const commands = {
   clear: {
     description: "Clear the terminal screen.",
     execute: () => "__CLEAR__",
+  },
+  loading: {
+    description: "__LOADING__",
+    execute: () => "__LOADING__",
   },
   legacy: {
     description: "__LEGACY__",
@@ -32,12 +44,18 @@ export const commands = {
     description: "__MENTOR__",
     execute: () => "__MENTOR__",
   },
-  
+  quote: {
+    description: "__QUOTE__",
+    execute: () => "__QUOTE__",
+  },
   thankyou: {
     description: "__THANKYOU__",
     execute: () => "__THANKYOU__",
   },
-  
+  leader: {
+    description: "__LEADER__",
+    execute: () => "__LEADER__",
+  },
   recommend: {
     description: "__RECOMMEND__",
     execute: () => "__RECOMMEND__",
@@ -46,7 +64,10 @@ export const commands = {
     description: "__EPILOGUE__",
     execute: () => "__EPILOGUE__",
   },
-  
+  thanks: {
+    description: "__THANKS__",
+    execute: () => "__THANKS__",
+  },
   sorry: {
     description: "__SORRY__",
     execute: () => "__SORRY__",
@@ -55,5 +76,8 @@ export const commands = {
     description: "__TMI__",
     execute: () => "__TMI__",
   },
-  
+  farewell: {
+    description: "__FAREWELL__",
+    execute: () => "__FAREWELL__",
+  },
 };
