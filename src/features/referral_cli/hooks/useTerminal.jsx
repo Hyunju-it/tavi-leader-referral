@@ -1,5 +1,5 @@
-
 import { useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { commands as COMMANDS } from '../constants/commands';
 import { devCommands } from '../constants/devCommands';
 import { availableFonts } from '../utils/fonts';
@@ -88,6 +88,41 @@ export const useTerminal = () => {
         </div>
       );
       setLines((prev) => [...prev, `> ${cmd}`, journeyElement]);
+      return;
+    }
+
+    if (output === "__IMPACT__") {
+      const impactData = [
+        "🚀 프로젝트 런칭 6회 → 신규 채널 확장, 매출 성장 견인",
+        "⚡ 성능 최적화 8건 → SQL/트래픽 튜닝으로 응답속도 최대 90% 단축",
+        "🤖 자동화·최적화 10건 → 운영 리소스 절감, 오류·재작업 방지",
+        "💡 신규 기능 개발 7건 → Kakao·Tripbtoz 연동 등 서비스 확장",
+        "🛠️ 프로세스 개선 12건 → 마감/취소/정산 로직 강화, 운영 효율화",
+        "🔍 품질 향상 9건 → 고객/파트너 피드백 반영, 오류 예방 및 안정성 확보",
+        "🌍 외부 협업 성과 6건 → 신화월드·롯데·Accor 등 주요 파트너 신뢰 제고",
+        "💡 아이디어 제안 다수 → TES/TAVI UI 개선, 운영 편의성 강화",
+      ];
+
+      const impactElement = (
+        <div className="flex flex-col items-start py-6 w-full">
+          <span className="text-lg font-bold text-[#93c5fd] mb-6">✨ Impact Timeline</span>
+          <div className="flex flex-col space-y-4">
+            {impactData.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.2 }}
+                className="flex items-center"
+              >
+                <span className="text-lg">{item.split(' ')[0]}</span>
+                <span className="ml-4 text-[#d0cde1]">{item.substring(item.indexOf(' ') + 1)}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      );
+      setLines((prev) => [...prev, `> ${cmd}`, impactElement]);
       return;
     }
 
