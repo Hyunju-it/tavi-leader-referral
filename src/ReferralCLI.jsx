@@ -7,19 +7,16 @@ export default function ReferralCLI() {
   const [lines, setLines] = useState(["> Welcome to Gemini Web CLI ✨"]);
   const [input, setInput] = useState("");
   const [typedOutput, setTypedOutput] = useState(null);
-  const [loading, setLoading] = useState(false);
   const outputRef = useRef(null);
   const canvasRef = useRef(null);
-  const spinnerRef = useRef(null);
 
   const commands = {
-    help: "Available commands: [help, about, stars, clear, loading, hi, love, journey, legacy, impact, mentor, quote, thankyou, leader, recommend, epilogue, thanks, sorry, tmi, farewell]",
+    help: "Available commands: [help, about, stars, clear, hi, love, journey, legacy, impact, mentor, quote, thankyou, leader, recommend, epilogue, thanks, sorry, tmi, farewell]",
     about: "This is a fake CLI running inside your browser 🌌",
     stars: "✨✨✨ Look at the galaxy shine ✨✨✨",
     hi: "🙏 Thank you for being here. Your presence is appreciated!",
     journey: "__JOURNEY__",
     clear: "__CLEAR__",
-    loading: "__LOADING__",
     legacy: "__LEGACY__",
     impact: "__IMPACT__",
     mentor: "__MENTOR__",
@@ -40,18 +37,6 @@ export default function ReferralCLI() {
 
     if (output === "__CLEAR__") {
       setLines(["> Console cleared"]);
-      return;
-    }
-
-    if (output === "__LOADING__") {
-      setLines((prev) => [...prev, `> ${normalizedCmd}`]);
-      setLoading(true);
-
-      setTimeout(() => {
-        setLoading(false);
-        spinnerRef.current.succeed("✔ Finished loading universe ✨");
-        setLines((prev) => [...prev, "✔ Finished loading universe ✨"]);
-      }, 3000);
       return;
     }
 
@@ -102,12 +87,6 @@ export default function ReferralCLI() {
       return;
     }
 
-    if (normalizedCmd === "hi") {
-      setLines((prev) => [...prev, `> ${normalizedCmd}`]);
-      setTypedOutput(commands["hi"]);
-      return;
-    }
-
     setLines((prev) => [...prev, `> ${normalizedCmd}`, output]);
   };
 
@@ -142,7 +121,7 @@ export default function ReferralCLI() {
     if (outputRef.current) {
       outputRef.current.scrollTop = outputRef.current.scrollHeight;
     }
-  }, [lines, typedOutput, loading]);
+  }, [lines, typedOutput]);
 
   useEffect(() => {
     const canvas = canvasRef.current;

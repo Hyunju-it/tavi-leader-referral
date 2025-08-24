@@ -3,7 +3,6 @@ import { useState, useCallback } from 'react';
 import { commands as COMMANDS } from '../constants/commands';
 import { devCommands } from '../constants/devCommands';
 import { availableFonts } from '../utils/fonts';
-import { motion } from 'framer-motion';
 
 const allCommands = { ...COMMANDS, ...devCommands };
 
@@ -43,17 +42,6 @@ export const useTerminal = () => {
 
     if (output === "__CLEAR__") {
       setLines(['> Console cleared']);
-      return;
-    }
-
-    if (output === "__LOADING__") {
-      setLines((prev) => [...prev, `> ${cmd}`]);
-      setLoading(true);
-
-      setTimeout(() => {
-        setLoading(false);
-        setLines((prev) => [...prev, "✔ Finished loading universe ✨"]);
-      }, 3000);
       return;
     }
 
@@ -103,12 +91,6 @@ export const useTerminal = () => {
       return;
     }
 
-    if (normalizedCmd === "hi") {
-      setLines((prev) => [...prev, `> ${cmd}`]);
-      setTypedOutput(COMMANDS["hi"]);
-      return;
-    }
-
     setLines((prev) => [...prev, `> ${cmd}`, output]);
   }, []);
 
@@ -123,7 +105,6 @@ export const useTerminal = () => {
   return {
     lines,
     input,
-    loading,
     typedOutput,
     font,
     setLines,
