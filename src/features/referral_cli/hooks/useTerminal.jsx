@@ -47,17 +47,6 @@ export const useTerminal = () => {
       return;
     }
 
-    if (output === "__LOADING__") {
-      setLines((prev) => [...prev, `> ${cmd}`]);
-      setLoading(true);
-
-      setTimeout(() => {
-        setLoading(false);
-        setLines((prev) => [...prev, "✔ Finished loading universe ✨"]);
-      }, 3000);
-      return;
-    }
-
     if (output === "__JOURNEY__") {
       const journeyData = [
         "🎯 혁신/개선",
@@ -101,12 +90,6 @@ export const useTerminal = () => {
         </div>
       );
       setLines((prev) => [...prev, `> ${cmd}`, journeyElement]);
-      return;
-    }
-
-    if (normalizedCmd === "hi") {
-      setLines((prev) => [...prev, `> ${cmd}`]);
-      setTypedOutput(COMMANDS["hi"]);
       return;
     }
 
