@@ -43,7 +43,7 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
             transition={{ duration: 0.2 }}
           >
             {isInputLine ? (
-              <div className="border border-gray-600 rounded-md p-2 my-2">
+              <div className="border border-[#444] rounded-md p-2 my-2">
                 <span style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{line}</span>
               </div>
             ) : typeof line === 'string' ? (

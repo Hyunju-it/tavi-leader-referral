@@ -8,7 +8,7 @@ const allCommands = { ...COMMANDS, ...devCommands };
 const commandList = Object.keys(allCommands);
 
 export const useTerminal = () => {
-  const [lines, setLines] = useState(['✦ > Welcome to Seo Gwang-won Referral Web CLI ✨']);
+  const [lines, setLines] = useState(['✧･ﾟ: *✧･ﾟ:* Welcome to Seo Gwang-won Referral Web CLI *:･ﾟ✧*:･ﾟ✧']);
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
   const [font, setFont] = useState('Standard');
