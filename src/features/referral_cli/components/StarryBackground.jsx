@@ -1,7 +1,7 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 
-export default function StarryBackground() {
+const StarryBackground = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -46,4 +46,6 @@ export default function StarryBackground() {
   }, []);
 
   return <canvas ref={canvasRef} className="absolute inset-0 -z-10" />;
-}
+};
+
+export default memo(StarryBackground);
