@@ -1,35 +1,40 @@
+import stringWidth from "string-width";
+
 export const commands = {
   help: {
     description: "사용 가능한 모든 명령어를 보여줍니다.",
     execute: () => {
-      const getVisualWidth = (str) => {
-        let width = 0;
-        for (let i = 0; i < str.length; i++) {
-          if (str.charCodeAt(i) > 255) {
-            width += 2;
-          } else {
-            width += 1;
-          }
-        }
-        return width;
+
+      // 표시폭(terminal columns) 계산 헬퍼
+      const sw = (s) => stringWidth(s, { ambiguousIsNarrow: true });
+
+      // 표시폭 기준 오른쪽 패딩
+      const padRight = (str, targetWidth) => {
+        const len = sw(str.replace(/[가-힣]/g, 'z'));
+        return str + " ".repeat(Math.max(0, targetWidth - len));
       };
 
-      const width = 60;
-      const top = '╔' + '═'.repeat(width) + '╗';
-      const header = '║' + ' Commands for your journey'.padEnd(width) + '║';
-      const middle = '╠' + '═'.repeat(width) + '╣';
-      const bottom = '╚' + '═'.repeat(width) + '╝';
+      const width = 60; // 테두리 안쪽 콘텐츠 폭(표시폭 기준)
+      const top    = "╔" + "═".repeat(width) + "╗";
+      const middle = "╚" + "═".repeat(width) + "╝";
+      const bottom = "╚" + "═".repeat(width) + "═";
 
-      const commandRows = Object.entries(commands)
-        .filter(([command]) => command !== 'help')
-        .map(([command, { description }]) => {
-          const text = `  ${command.padEnd(15)} → ${description}`;
-          const visualWidth = getVisualWidth(text);
-          const padding = width - visualWidth;
-          return `║${text}${' '.repeat(padding > 0 ? padding : 0)}║`;
-        });
+      // 헤더
+      const header = "║" + padRight(" Commands", width) + "║";
 
-      return [top, header, middle, ...commandRows, bottom].join('\n');
+      // 왼쪽 컬럼 폭(표시폭 기준)
+      const cmdCol = 10; // command 이름 영역
+      const arrow  = " → ";
+
+      const rows = Object.entries(commands)
+          .filter(([name]) => name !== "help")
+          .map(([name, { description }]) => {
+            const left = "  " + padRight(name, cmdCol); // "  " + command 15칸
+            const line = `${left}${arrow}${description}`;
+            return "║" + padRight(line, width) ;
+          });
+
+      return [top, header, middle, ...rows, bottom].join("\n");
     },
   },
   journey: {
