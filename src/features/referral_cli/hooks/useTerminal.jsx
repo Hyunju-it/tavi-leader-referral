@@ -21,9 +21,9 @@ export const useTerminal = () => {
       const newFont = args[0];
       if (availableFonts.includes(newFont)) {
         setFont(newFont);
-        setLines((prev) => [...prev, `> ${cmd}`, `Font changed to ${newFont}`]);
+        setLines([`> ${cmd}`, `Font changed to ${newFont}`]);
       } else {
-        setLines((prev) => [...prev, `> ${cmd}`, `Font not found: ${newFont}`]);
+        setLines([`> ${cmd}`, `Font not found: ${newFont}`]);
       }
       return;
     }
@@ -39,11 +39,6 @@ export const useTerminal = () => {
       }
     } else {
       output = `Command not found: ${normalizedCmd}`;
-    }
-
-    if (output === "__CLEAR__") {
-      setLines(['> Console cleared']);
-      return;
     }
 
     if (output === "__JOURNEY__") {
@@ -88,7 +83,7 @@ export const useTerminal = () => {
           </div>
         </div>
       );
-      setLines((prev) => [...prev, `> ${cmd}`, journeyElement]);
+      setLines([`> ${cmd}`, journeyElement]);
       return;
     }
 
@@ -123,12 +118,12 @@ export const useTerminal = () => {
           </div>
         </div>
       );
-      setLines((prev) => [...prev, `> ${cmd}`, impactElement]);
+      setLines([`> ${cmd}`, impactElement]);
       return;
     }
 
-    setLines((prev) => [...prev, `> ${cmd}`, output]);
-  }, []);
+    setLines([`> ${cmd}`, output]);
+  }, [setFont, setLines]);
 
   const handleTabCompletion = useCallback(() => {
     const currentInput = input.trim();

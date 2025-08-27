@@ -12,10 +12,7 @@ export const commands = {
     description: "선배가 걸어온 길을 따라가봅니다.",
     execute: () => "__JOURNEY__",
   },
-  clear: {
-    description: "터미널 화면을 초기화합니다.",
-    execute: () => "__CLEAR__",
-  },
+  
   impact: {
     description: "팀과 회사에 남긴 흔적과 울림을 되새깁니다.",
     execute: () => "__IMPACT__",
