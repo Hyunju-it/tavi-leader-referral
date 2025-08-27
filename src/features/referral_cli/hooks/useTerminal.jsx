@@ -8,7 +8,7 @@ const allCommands = { ...COMMANDS, ...devCommands };
 const commandList = Object.keys(allCommands);
 
 export const useTerminal = () => {
-  const [lines, setLines] = useState(['> Welcome to Seo Gwang-won Referral Web CLI ✨']);
+  const [lines, setLines] = useState(['✦ > Welcome to Seo Gwang-won Referral Web CLI ✨']);
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
   const [font, setFont] = useState('Standard');
@@ -21,9 +21,9 @@ export const useTerminal = () => {
       const newFont = args[0];
       if (availableFonts.includes(newFont)) {
         setFont(newFont);
-        setLines([`> ${cmd}`, `Font changed to ${newFont}`]);
+        setLines([`✦ > ${cmd}`, `Font changed to ${newFont}`]);
       } else {
-        setLines([`> ${cmd}`, `Font not found: ${newFont}`]);
+        setLines([`✦ > ${cmd}`, `Font not found: ${newFont}`]);
       }
       return;
     }
@@ -83,7 +83,7 @@ export const useTerminal = () => {
           </div>
         </div>
       );
-      setLines([`> ${cmd}`, journeyElement]);
+      setLines([`✦ > ${cmd}`, journeyElement]);
       return;
     }
 
@@ -118,11 +118,11 @@ export const useTerminal = () => {
           </div>
         </div>
       );
-      setLines([`> ${cmd}`, impactElement]);
+      setLines([`✦ > ${cmd}`, impactElement]);
       return;
     }
 
-    setLines([`> ${cmd}`, output]);
+    setLines([`✦ > ${cmd}`, output]);
   }, [setFont, setLines]);
 
   const handleTabCompletion = useCallback(() => {
@@ -134,7 +134,7 @@ export const useTerminal = () => {
     if (matchingCommands.length === 1) {
       setInput(matchingCommands[0]);
     } else if (matchingCommands.length > 1) {
-      setLines((prev) => [...prev, `> ${currentInput}`, matchingCommands.join('  ')]);
+      setLines((prev) => [...prev, `✦ > ${currentInput}`, matchingCommands.join('  ')]);
     }
   }, [input, setLines]);
 
