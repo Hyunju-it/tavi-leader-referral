@@ -2,10 +2,34 @@ export const commands = {
   help: {
     description: "사용 가능한 모든 명령어를 보여줍니다.",
     execute: () => {
-      const commandList = Object.entries(commands)
-        .map(([command, { description }]) => `  ${command.padEnd(15)} ${description}`)
-        .join("\n");
-      return `Available commands:\n${commandList}`;
+      const getVisualWidth = (str) => {
+        let width = 0;
+        for (let i = 0; i < str.length; i++) {
+          if (str.charCodeAt(i) > 255) {
+            width += 2;
+          } else {
+            width += 1;
+          }
+        }
+        return width;
+      };
+
+      const width = 60;
+      const top = '╔' + '═'.repeat(width) + '╗';
+      const header = '║' + ' Commands for your journey'.padEnd(width) + '║';
+      const middle = '╠' + '═'.repeat(width) + '╣';
+      const bottom = '╚' + '═'.repeat(width) + '╝';
+
+      const commandRows = Object.entries(commands)
+        .filter(([command]) => command !== 'help')
+        .map(([command, { description }]) => {
+          const text = `  ${command.padEnd(15)} → ${description}`;
+          const visualWidth = getVisualWidth(text);
+          const padding = width - visualWidth;
+          return `║${text}${' '.repeat(padding > 0 ? padding : 0)}║`;
+        });
+
+      return [top, header, middle, ...commandRows, bottom].join('\n');
     },
   },
   journey: {
