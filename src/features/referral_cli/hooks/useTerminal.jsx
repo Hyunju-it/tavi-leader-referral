@@ -5,6 +5,7 @@ import { devCommands } from '../constants/devCommands';
 import { availableFonts } from '../utils/fonts';
 
 const allCommands = { ...COMMANDS, ...devCommands };
+const commandList = Object.keys(allCommands);
 
 export const useTerminal = () => {
   const [lines, setLines] = useState(['> Welcome to Seo Gwang-won Referral Web CLI ✨']);
@@ -129,13 +130,29 @@ export const useTerminal = () => {
     setLines((prev) => [...prev, `> ${cmd}`, output]);
   }, []);
 
+  const handleTabCompletion = useCallback(() => {
+    const currentInput = input.trim();
+    if (!currentInput) return;
+
+    const matchingCommands = commandList.filter((c) => c.startsWith(currentInput));
+
+    if (matchingCommands.length === 1) {
+      setInput(matchingCommands[0]);
+    } else if (matchingCommands.length > 1) {
+      setLines((prev) => [...prev, `> ${currentInput}`, matchingCommands.join('  ')]);
+    }
+  }, [input, setLines]);
+
   const onKeyDown = useCallback((e) => {
     if (e.key === "Enter") {
       const cmd = input.trim();
       if (cmd) handleCommand(cmd);
       setInput("");
+    } else if (e.key === "Tab") {
+      e.preventDefault();
+      handleTabCompletion();
     }
-  }, [input, handleCommand]);
+  }, [input, handleCommand, handleTabCompletion]);
 
   return {
     lines,
