@@ -33,20 +33,27 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
 
   return (
     <div ref={outputRef} className="flex-1 overflow-y-auto px-4 py-3 text-[#e5e7eb] bg-[#1e1e1e]/95">
-      {lines.map((line, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          {typeof line === 'string' ? (
-            <span style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{line}</span>
-          ) : (
-            line
-          )}
-        </motion.div>
-      ))}
+      {lines.map((line, i) => {
+        const isInputLine = typeof line === 'string' && line.startsWith('✦ >');
+        return (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {isInputLine ? (
+              <div className="border border-gray-600 rounded-md p-2 my-2">
+                <span style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{line}</span>
+              </div>
+            ) : typeof line === 'string' ? (
+              <span style={{ whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{line}</span>
+            ) : (
+              line
+            )}
+          </motion.div>
+        );
+      })}
       {typedOutput && <div id="typed-output" className="text-[#93c5fd] font-semibold"></div>}
     </div>
   );
