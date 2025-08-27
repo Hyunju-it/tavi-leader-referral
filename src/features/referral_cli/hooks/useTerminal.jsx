@@ -8,7 +8,11 @@ const allCommands = { ...COMMANDS, ...devCommands };
 const commandList = Object.keys(allCommands);
 
 export const useTerminal = () => {
-  const [lines, setLines] = useState(['✧･ﾟ: *✧･ﾟ:* Welcome to Seo Gwang-won Referral Web CLI *:･ﾟ✧*:･ﾟ✧']);
+  const [lines, setLines] = useState([
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">
+      ✧･ﾟ: *✧･ﾟ:* Welcome to Seo Gwang-won Referral Web CLI *:･ﾟ✧*:･ﾟ✧
+    </span>
+  ]);
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
   const [font, setFont] = useState('Standard');
