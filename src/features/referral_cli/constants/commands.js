@@ -8,10 +8,6 @@ export const commands = {
       return `Available commands:\n${commandList}`;
     },
   },
-  about: {
-    description: "이 CLI의 목적과 헌정 배경을 소개합니다. 🌌",
-    execute: () => "This is a fake CLI running inside your browser 🌌",
-  },
   journey: {
     description: "선배가 걸어온 길을 따라가봅니다.",
     execute: () => "__JOURNEY__",
@@ -57,10 +53,6 @@ export const commands = {
 💡 인간적 배려
 업무 외적으로도 동료의 상황을 세심하게 살핌
 단순한 팀워크를 넘어 “함께 일하고 싶은 팀 분위기”를 만들어냄`,
-  },
-  mentor: {
-    description: "후배들에게 남긴 말과 조언을 다시 들어봅니다.",
-    execute: () => "__MENTOR__",
   },
   sorry: {
     description: "전하지 못했던 미안함을 조심스레 풀어놓습니다.",
@@ -118,10 +110,6 @@ export const commands = {
 그 태도를 곁에서 지켜볼 수 있었다는 사실 자체가 제게는 가장 큰 선물이었습니다.
 
 광원님, 진심으로 감사합니다.`,
-  },
-  tmi: {
-    description: "웃음 섞인 기억과 소소한 TMI들을 남겨봅니다.",
-    execute: () => "__TMI__",
   },
   epilogue: {
     description: "후배로서 남기고 싶은 마지막 고백을 기록합니다.",
