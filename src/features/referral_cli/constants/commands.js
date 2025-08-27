@@ -23,11 +23,11 @@ export const commands = {
       const header = "║" + padRight(" Commands", width) + "║";
 
       // 왼쪽 컬럼 폭(표시폭 기준)
-      const cmdCol = 10; // command 이름 영역
-      const arrow  = " → ";
+      const cmdCol = 15; // command 이름 영역
+      const arrow  = " →    ";
 
       const rows = Object.entries(commands)
-          .filter(([name]) => name !== "help")
+          .filter(([name]) => name !== "help" && name !== "sorry" && name !== "thankyou")
           .map(([name, { description }]) => {
             const left = "  " + padRight(name, cmdCol); // "  " + command 15칸
             const line = `${left}${arrow}${description}`;
@@ -38,16 +38,19 @@ export const commands = {
     },
   },
   journey: {
-    description: "선배가 걸어온 길을 따라가봅니다.",
+    description: "선배의 여정을 돌아봅니다.",
     execute: () => "__JOURNEY__",
   },
-  
   impact: {
-    description: "팀과 회사에 남긴 흔적과 울림을 되새깁니다.",
+    description: "조직에 남긴 대표적인 성과를 기록합니다.",
     execute: () => "__IMPACT__",
   },
+  achievements: {
+    description: "세부적인 업적과 기여를 나열합니다.",
+    execute: () => "__ACHIEVEMENTS__",
+  },
   recommend: {
-    description: "이 분과 함께할 기회가 얼마나 큰 행운인지 전합니다.",
+    description: "이 분의 역량과 추천 사유를 기록합니다.",
     execute: () => `서광원 님은 제가 경험한 동료 중 최고의 커뮤니케이터이자 협업형 리더입니다.
 수많은 동료들과 함께했지만, 커뮤니케이션과 협업 역량에서 서광원 님만큼 뛰어난 분은 없었습니다.
 
@@ -138,7 +141,7 @@ export const commands = {
 광원님, 진심으로 감사합니다.`,
   },
   epilogue: {
-    description: "후배로서 남기고 싶은 마지막 고백을 기록합니다.",
+    description: "후배로서 남기고 싶은 마지막 응원을 기록합니다.",
     execute: () => `많은 면접을 거치며 다양한 피드백을 얻고, 스스로도 깊은 성찰을 하신 걸 보았습니다.
 그 과정에서 때로는 부족한 점에 마음이 더 쏠리기도 하지만, 사실 이미 충분히 큰 강점들을 지니고 계심을 잊지 않으셨으면 합니다.
 
