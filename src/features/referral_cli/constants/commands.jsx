@@ -210,8 +210,10 @@ export const commands = {
         }
       ];
 
+      const animationKey = `impact-${Date.now()}`;
+      
       return (
-        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4" key={animationKey}>
           <motion.div 
             className="mb-4"
             initial={{ opacity: 0, y: -15 }}
@@ -237,14 +239,18 @@ export const commands = {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 1, 0] }}
+            initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+            animate={{ 
+              opacity: [0, 1, 1, 0],
+              height: [0, "auto", "auto", 0],
+              marginBottom: [0, 16, 16, 0]
+            }}
             transition={{ 
               delay: 0.6, 
               duration: 2.4,
               times: [0, 0.2, 0.8, 1]
             }}
-            className="text-sm text-gray-400 mb-4 flex items-center space-x-2"
+            className="text-sm text-gray-400 flex items-center space-x-2 overflow-hidden"
           >
             <motion.div
               className="w-4 h-4 border-2 border-gray-400 border-t-cyan-400 rounded-full"
@@ -373,8 +379,10 @@ export const commands = {
         { category: "QUALITY_ENHANCE", items: ["고객 피드백 반영 9건", "파트너 요구사항 수용", "오류 예방 시스템 구축"] }
       ];
 
+      const animationKey = `achievements-${Date.now()}`;
+      
       return (
-        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4" key={animationKey}>
           <motion.div 
             className="mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
@@ -386,14 +394,18 @@ export const commands = {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 1, 0] }}
+            initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+            animate={{ 
+              opacity: [0, 1, 1, 0],
+              height: [0, "auto", "auto", 0],
+              marginBottom: [0, 16, 16, 0]
+            }}
             transition={{ 
               delay: 0.6, 
               duration: 2.4,
               times: [0, 0.2, 0.8, 1]
             }}
-            className="text-sm text-gray-400 mb-4 flex items-center space-x-2"
+            className="text-sm text-gray-400 flex items-center space-x-2 overflow-hidden"
           >
             <motion.div
               className="w-4 h-4 border-2 border-gray-400 border-t-yellow-400 rounded-full"
