@@ -2,9 +2,10 @@ import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { commands as COMMANDS } from '../constants/commands';
 import { devCommands } from '../constants/devCommands';
+import { secretCommands } from '../constants/secretCommands';
 import { availableFonts } from '../utils/fonts';
 
-const allCommands = { ...COMMANDS, ...devCommands };
+const allCommands = { ...COMMANDS, ...devCommands, ...secretCommands };
 const commandList = Object.keys(allCommands);
 
 export const useTerminal = () => {
