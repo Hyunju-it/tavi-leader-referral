@@ -29,9 +29,9 @@ export const useTerminal = () => {
       <div className="bg-gray-900 border-l-2 border-cyan-500 px-4 py-3 mx-2 md:mx-4">
         <div className="text-green-400 font-semibold mb-2">System Status: ONLINE</div>
         <div className="text-gray-300 text-sm space-y-1">
-          <div>• Available commands: {Object.keys(allCommands).length}</div>
+          <div>• Available commands: {Object.keys(allCommands).length - Object.keys(devCommands).length}</div>
           <div>• Reference data: LOADED</div>
-          <div>• Career timeline: 2023.03 - 2024.08</div>
+          <div>• Career timeline: 20xx.xx - 2025.08</div>
         </div>
       </div>
       
