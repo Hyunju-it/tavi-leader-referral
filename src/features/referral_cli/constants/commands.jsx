@@ -390,7 +390,7 @@ export const commands = {
             transition={{ duration: 0.4 }}
           >
             <div className="text-cyan-400 font-semibold">Achievements Report</div>
-            <div className="text-gray-400 text-xs">Generated: {new Date().toISOString().split('T')[0]}</div>
+            <div className="text-gray-400 text-xs">Generated: {new Date().toISOString().split('T')[0]} (Jira 기준)</div>
           </motion.div>
 
           <motion.div
@@ -511,7 +511,7 @@ export const commands = {
         { title: "RESPONSIBILITY", desc: ["어떤 상황에서도 맡은 일을 끝까지 책임지고 완수", "동료들에게 안정감과 신뢰를 주는 든든한 리더"] },
         { title: "COLLABORATION", desc: ["다양한 의견을 열린 마음으로 경청하고 조율", "갈등 상황에서도 빠르게 합의점을 찾아내는 능력"] },
         { title: "LEADERSHIP", desc: ["위기 상황에서도 침착함을 잃지 않고 방향 제시", "역할을 명확히 나눠주어 혼란 최소화, 팀의 자신감 극대화"] },
-        { title: "MENTORING", desc: ["실질적이고 actionable(실행 가능한) 피드백 제공", "팀원 개개인의 강점을 살리고 부족한 점을 보완하도록 돕는 멘토"] },
+        { title: "MENTORING", desc: ["실질적이고 actionable(실행 가능한) 피드백 제공", "팀원 개개인의 강점을 살리고, 부족한 부분은 채워줄 수 있도록 이끄는 멘토"] },
         { title: "HUMAN_CARE", desc: ["업무 외적으로도 동료의 상황을 세심하게 살핌", "단순한 팀워크를 넘어 \"함께 일하고 싶은 팀 분위기\"를 만들어냄"] }
       ];
 
@@ -553,7 +553,7 @@ export const commands = {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.0, duration: 0.8 }}
               >
-                서광원 님은 제가 경험한 동료 중 최고의 커뮤니케이터이자 협업형 리더입니다.<br/>
+                  서광원 님은 제가 경험한 동료 중 <span className="text-cyan-400 font-semibold">최고의 커뮤니케이터이자 협업형 리더</span> 입니다.<br/>
                 수많은 동료들과 함께했지만, 커뮤니케이션과 협업 역량에서 서광원 님만큼 뛰어난 분은 없었습니다.<br/><br/>
                 선배님은 단순히 의견을 맞추는 수준을 넘어서, 이해관계가 다른 사람들까지 빠르게 한 방향으로 모아내는 힘이 있었습니다.
               </motion.div>
