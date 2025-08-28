@@ -1,5 +1,6 @@
 import stringWidth from "string-width";
 import { motion } from 'framer-motion';
+import NumberedTypingEffect from '../components/NumberedTypingEffect';
 
 export const commands = {
   help: {
@@ -648,45 +649,32 @@ export const commands = {
     description: "후배로서 남기고 싶은 마지막 응원을 기록합니다.",
     execute: () => {
       const messages = [
-        "다양한 과정을 겪으면서 고생하시고, 그에 대한 고민이나 생각을 들으며 걱정했습니다.",
-        "그 과정에서 때로는 부족한 점에 마음이 더 쏠리기도 하지만, 사실 이미 충분히 큰 강점들을 지니고 계심을 잊지 않으셨으면 합니다.",
-        "저는 가까이에서 선배님이 얼마나 뛰어난 역량과 책임감을 보여주셨는지를 계속 보아왔습니다.",
-        "선배님은 이미 충분히 대단한 분이고, 이번 경험들은 앞으로 더 큰 가능성을 쌓아가는 밑거름이 될 것이라 믿습니다.",
-        "다른 사람도 언젠가 이 멋진 점을 알아봐주길 바라며 진심을 다해서 만들었습니다."
+        "[01] 다양한 과정을 겪으면서 고생하시고, 그에 대한 고민이나 생각을 들으며 걱정했습니다.",
+        "[02] 그 과정에서 때로는 부족한 점에 마음이 더 쏠리기도 하지만, 사실 이미 충분히 큰 강점들을 지니고 계심을 잊지 않으셨으면 합니다.",
+        "[03] 저는 가까이에서 선배님이 얼마나 뛰어난 역량과 책임감을 보여주셨는지를 계속 보아왔습니다.",
+        "[04] 선배님은 이미 충분히 대단한 분이고, 이번 경험들은 앞으로 더 큰 가능성을 쌓아가는 밑거름이 될 것이라 믿습니다.",
+        "[05] 다른 사람도 언젠가 이 멋진 점을 알아봐주길 바라며 진심을 다해서 만들었습니다.",
+        "",
+        "◆ 언제나 응원하고 있습니다 ◆",
+        "",
+        "[ TMI ]",
+        "기획 갈아엎기 3번, 디자인 전체 갈아엎기 2번, 컨셉 갈아엎기 5번, 색상 갈아엎기 3번, 약 1년 6개월 만에 다시 만지는 React...",
+        "높은 완성도로 만들고 싶었는데 원하는 만큼 안나온 것 같아서 많이 아쉽습니다."
       ];
 
       return (
         <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
-          <div className="mb-4">
+          <div className="mb-6">
             <div className="text-cyan-400 font-semibold">Personal Message</div>
             <div className="text-gray-400 text-xs">From: 후배 | To: 광원님</div>
           </div>
 
-          <div className="space-y-4">
-            {messages.map((message, i) => (
-              <div key={i} className="flex">
-                <div className="text-yellow-400 mr-3 font-mono text-xs mt-1">
-                  [{(i + 1).toString().padStart(2, '0')}]
-                </div>
-                <div className="text-gray-300 leading-relaxed flex-1">
-                  {message}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 pt-2 border-t border-gray-700">
-            <div className="text-center">
-              <div className="text-magenta-400">
-                ◆ 언제나 응원하고 있습니다 ◆
-              </div>
-                <div className="text-gray-400 text-xs mt-10">
-                    [ TMI ]<br />
-                    기획 갈아엎기 3번, 디자인 전체 갈아엎기 2번, 컨셉 갈아엎기 5번, 색상 갈아엎기 3번, 약 1년 6개월 만에 다시 만지는 React...<br />
-                    높은 완성도로 만들고 싶었는데 원하는 만큼 안나온 것 같아서 많이 아쉽습니다. <br />
-                </div>
-            </div>
-          </div>
+          <NumberedTypingEffect 
+            messages={messages} 
+            typingSpeed={30} 
+            lineDelay={800}
+            numberColor="text-yellow-400"
+          />
         </div>
       );
     },
