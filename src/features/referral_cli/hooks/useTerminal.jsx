@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import ConfettiBoom from 'react-confetti-boom';
 import { commands as COMMANDS } from '../constants/commands';
 import { devCommands } from '../constants/devCommands';
 import { secretCommands } from '../constants/secretCommands';
@@ -17,6 +18,7 @@ export const useTerminal = () => {
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
   const [font, setFont] = useState('Standard');
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const handleCommand = useCallback((cmd) => {
     const [command, ...args] = cmd.split(' ');
@@ -41,6 +43,12 @@ export const useTerminal = () => {
         output = commandObj.execute(...args);
       } else {
         output = commandObj;
+      }
+
+      // epilogue 명령어 실행 시 콘페티 효과 트리거
+      if (normalizedCmd === 'epilogue') {
+        setShowConfetti(true);
+        setTimeout(() => setShowConfetti(false), 3000); // 3초 후 콘페티 종료
       }
     } else {
       output = `Command not found: ${normalizedCmd}`;
@@ -163,5 +171,6 @@ export const useTerminal = () => {
     setInput,
     setTypedOutput,
     onKeyDown,
+    showConfetti,
   };
 };
