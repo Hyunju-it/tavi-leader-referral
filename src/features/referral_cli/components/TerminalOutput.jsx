@@ -6,11 +6,7 @@ import Typed from 'typed.js';
 export default function TerminalOutput({ lines, typedOutput, setLines, setTypedOutput }) {
   const outputRef = useRef(null);
 
-  useEffect(() => {
-    if (outputRef.current) {
-      outputRef.current.scrollTop = outputRef.current.scrollHeight;
-    }
-  }, [lines, typedOutput]);
+  // 스크롤 자동 추적 해제
 
   useEffect(() => {
     if (typedOutput) {
