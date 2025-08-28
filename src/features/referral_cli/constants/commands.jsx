@@ -332,7 +332,7 @@ export const commands = {
     },
   },
   
-  impactdetails: {
+  portfolio: {
     description: "상세한 프로젝트 임팩트 내역을 카테고리별로 출력합니다.",
     execute: async () => {
       try {
