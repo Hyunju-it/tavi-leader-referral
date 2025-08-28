@@ -1,7 +1,7 @@
 
 export default function TerminalInput({ input, setInput, onKeyDown }) {
   return (
-    <div className="flex items-center bg-gray-950 px-4 py-3 border-t border-gray-700 font-mono">
+    <div className="flex items-center bg-gray-950 px-3 md:px-4 py-3 border-t border-gray-700 font-mono">
       <span className="text-cyan-400 mr-2">$</span>
       <input
         autoFocus

@@ -32,7 +32,7 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
   }, [typedOutput, setLines, setTypedOutput]);
 
   return (
-    <div ref={outputRef} className="flex-1 overflow-y-auto px-4 py-3 text-gray-300 bg-gray-950 font-mono">
+    <div ref={outputRef} className="flex-1 overflow-y-auto px-3 md:px-4 py-3 text-gray-300 bg-gray-950 font-mono">
       {lines.map((line, i) => {
         const isInputLine = typeof line === 'string' && line.startsWith('$ ');
         return (
@@ -44,7 +44,7 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
             className="mb-4"
           >
             {isInputLine ? (
-              <div className="ml-4">
+              <div className="ml-2 md:ml-4">
                 <div className="border-l-2 border-cyan-500 bg-gray-900 px-3 py-2 mb-3">
                   <span className="text-cyan-400">{line.replace('$ ', '$ ')}</span>
                 </div>

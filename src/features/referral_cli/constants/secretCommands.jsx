@@ -23,7 +23,7 @@ export const secretCommands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-red-400 font-semibold">Apology Message</div>
             <div className="text-gray-400 text-xs">Personal confession | Status: UNDELIVERED</div>
@@ -80,7 +80,7 @@ export const secretCommands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-green-400 font-semibold">Gratitude Message</div>
             <div className="text-gray-400 text-xs">Personal testimony | Status: HEARTFELT</div>

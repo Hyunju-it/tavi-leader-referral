@@ -22,7 +22,7 @@ export const commands = {
           });
 
       return (
-        <div className="max-w-4xl mx-auto font-mono leading-relaxed space-y-4">
+        <div className="max-w-4xl mx-2 md:mx-auto font-mono leading-relaxed space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold mb-1">
               Available Commands:
@@ -76,7 +76,7 @@ export const commands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold">Career Journey Report</div>
             <div className="text-gray-400 text-xs">Subject: 서광원 | Timeline: Professional Experience</div>
@@ -155,7 +155,7 @@ export const commands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-5xl mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-5xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold">Business Impact Analysis</div>
             <div className="text-gray-400 text-xs">Subject: 서광원 | Period: 2023.03 - 2024.08</div>
@@ -201,7 +201,7 @@ export const commands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-5xl mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-5xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold">Achievements Report</div>
             <div className="text-gray-400 text-xs">Generated: {new Date().toISOString().split('T')[0]}</div>
@@ -243,7 +243,7 @@ export const commands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold">Recommendation Report</div>
             <div className="text-gray-400 text-xs">Subject: 서광원 | Evaluator: 후배 개발자</div>
@@ -301,7 +301,7 @@ export const commands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold">Personal Message</div>
             <div className="text-gray-400 text-xs">From: 후배 | To: 광원님</div>
