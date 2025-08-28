@@ -76,26 +76,26 @@ export const commands = {
     },
   },
   about: {
-    description: "선배의 여정을 돌아봅니다.",
+    description: "선배를 소개합니다.",
     execute: () => {
       const journeyData = [
         {
-          period: "서광원 팀장님 2016.?? - 2025.08.29",
+          period: "서광원 팀장님 2016.xx - 2025.08.29",
           role: "백엔드 개발자 / 팀장",
           team: "호텔 CMS 개발팀",
           highlights: [
-            "TideSquare CMS 프로젝트 리딩 / 전반적인 개발",
-            "신규 CMS 연동 / 신규 채널 구축 프로젝트 주도",
+            "TideSquare CMS 프로젝트 총괄 및 전반적인 개발 주도",
+            "신규 CMS 연동 및 판매채널 구축 프로젝트 리딩",
             "팀 내 협업 프로세스와 코드 리뷰 문화에 적응"
           ]
         },
         {
           period: "이현주 2024.10 - 2025.08",
           role: "주니어 백엔드 개발자",
-          team: "여행 플랫폼 서비스팀",
+          team: "호텔 CMS 개발팀",
           highlights: [
-            "서광원 시니어와 함께 다양한 프로젝트 협업",
-            "Kakao 연동, Tripbtoz 파트너 연동 등 외부 시스템 통합",
+            "서광원 팀장님과 함께 다양한 프로젝트 협업",
+            "Kakao 및 Tripbtoz, Yanolja 등 외부 파트너 연동 개발",
             "운영 이슈 해결 및 시스템 안정성 개선 경험 축적"
           ]
         }
@@ -212,34 +212,151 @@ export const commands = {
 
       return (
         <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
-          <div className="mb-4">
-            <div className="text-cyan-400 font-semibold">Business Impact Analysis</div>
-            <div className="text-gray-400 text-xs">Subject: 서광원 | Period: 2023.03 - 2024.08</div>
-          </div>
+          <motion.div 
+            className="mb-4"
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.div 
+              className="text-cyan-400 font-semibold"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              Business Impact Analysis
+            </motion.div>
+            <motion.div 
+              className="text-gray-400 text-xs"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.3 }}
+            >
+              Subject: 서광원 | Period: 2023.03 - 2024.08
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 1, 0] }}
+            transition={{ 
+              delay: 0.6, 
+              duration: 2.4,
+              times: [0, 0.2, 0.8, 1]
+            }}
+            className="text-sm text-gray-400 mb-4 flex items-center space-x-2"
+          >
+            <motion.div
+              className="w-4 h-4 border-2 border-gray-400 border-t-cyan-400 rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ 
+                duration: 0.8, 
+                repeat: Infinity, 
+                ease: "linear",
+                delay: 0.8 
+              }}
+            />
+            <span>Analyzing organizational impact metrics...</span>
+          </motion.div>
 
           {impactData.map((item, i) => (
-            <div key={i} className="mb-4">
-              <div className="mb-1">
-                <div className="text-green-400 font-semibold">
+            <motion.div 
+              key={i} 
+              className="mb-4"
+              initial={{ opacity: 0, x: -40, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.6, 
+                delay: 3.2 + i * 0.3, // 로딩 메시지 사라진 후 시작
+                ease: "easeOut"
+              }}
+            >
+              <motion.div 
+                className="mb-1"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 3.4 + i * 0.3, duration: 0.3 }}
+              >
+                <motion.div 
+                  className="text-green-400 font-semibold"
+                  initial={{ x: -20 }}
+                  animate={{ x: 0 }}
+                  transition={{ 
+                    delay: 3.5 + i * 0.3, 
+                    duration: 0.4,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                >
                   {item.category}: {item.impact}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               
-              <div className="bg-gray-950 p-3 border-l-2 border-green-500 ml-2">
+              <motion.div 
+                className="bg-gray-950 p-3 border-l-2 border-green-500 ml-2"
+                initial={{ opacity: 0, x: -30, scaleX: 0.8 }}
+                animate={{ opacity: 1, x: 0, scaleX: 1 }}
+                transition={{ 
+                  delay: 3.6 + i * 0.3, 
+                  duration: 0.5,
+                  ease: "easeOut"
+                }}
+              >
                 {item.details.map((detail, j) => (
-                  <div key={j} className="text-gray-300 py-0.5">
-                    • {detail}
-                  </div>
+                  <motion.div 
+                    key={j} 
+                    className="text-gray-300 py-0.5"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      delay: 3.8 + i * 0.3 + j * 0.1,
+                      duration: 0.3,
+                      ease: "easeOut"
+                    }}
+                  >
+                    <motion.span
+                      initial={{ color: "#9ca3af" }}
+                      animate={{ color: ["#9ca3af", "#22c55e", "#9ca3af"] }}
+                      transition={{ 
+                        delay: 4.0 + i * 0.3 + j * 0.1,
+                        duration: 0.8,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      •
+                    </motion.span>
+                    <span className="ml-2">{detail}</span>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
 
-          <div className="mt-6 pt-2 border-t border-gray-700">
-            <div className="text-green-400 text-xs">
+          <motion.div 
+            className="mt-6 pt-2 border-t border-gray-700"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 4.5 + impactData.length * 0.3, duration: 0.6 }}
+          >
+            <motion.div 
+              className="text-green-400 text-xs"
+              animate={{ 
+                textShadow: [
+                  "0 0 0px #22c55e",
+                  "0 0 10px #22c55e40", 
+                  "0 0 0px #22c55e"
+                ]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 5.0 + impactData.length * 0.3
+              }}
+            >
               ✓ Impact assessment complete. Overall contribution: SIGNIFICANT POSITIVE
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       );
     },
@@ -270,11 +387,25 @@ export const commands = {
 
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.3 }}
-            className="text-sm text-gray-400 mb-4"
+            animate={{ opacity: [0, 1, 1, 0] }}
+            transition={{ 
+              delay: 0.6, 
+              duration: 2.4,
+              times: [0, 0.2, 0.8, 1]
+            }}
+            className="text-sm text-gray-400 mb-4 flex items-center space-x-2"
           >
-            Analyzing performance metrics...
+            <motion.div
+              className="w-4 h-4 border-2 border-gray-400 border-t-yellow-400 rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ 
+                duration: 0.8, 
+                repeat: Infinity, 
+                ease: "linear",
+                delay: 0.8 
+              }}
+            />
+            <span>Analyzing performance metrics...</span>
           </motion.div>
 
           {achievementsData.map((achievement, i) => (
@@ -284,7 +415,7 @@ export const commands = {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ 
-                delay: 0.5 + i * 0.2, 
+                delay: 3.2 + i * 0.2, // 로딩 완료 후 시작
                 duration: 0.4,
                 ease: "easeOut" 
               }}
@@ -293,7 +424,7 @@ export const commands = {
                 className="text-yellow-400 font-semibold mb-1"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.7 + i * 0.2, duration: 0.3 }}
+                transition={{ delay: 3.4 + i * 0.2, duration: 0.3 }}
               >
                 {achievement.category}:
               </motion.div>
@@ -301,7 +432,7 @@ export const commands = {
                 className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2"
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.8 + i * 0.2, duration: 0.3 }}
+                transition={{ delay: 3.5 + i * 0.2, duration: 0.3 }}
               >
                 {achievement.items.map((item, j) => (
                   <motion.div 
@@ -310,11 +441,22 @@ export const commands = {
                     initial={{ opacity: 0, x: -15 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ 
-                      delay: 0.9 + i * 0.2 + j * 0.1,
+                      delay: 3.6 + i * 0.2 + j * 0.1,
                       duration: 0.2
                     }}
                   >
-                    • {item}
+                    <motion.span
+                      initial={{ color: "#9ca3af" }}
+                      animate={{ color: ["#9ca3af", "#eab308", "#9ca3af"] }}
+                      transition={{ 
+                        delay: 3.7 + i * 0.2 + j * 0.1,
+                        duration: 0.6,
+                        ease: "easeInOut"
+                      }}
+                    >
+                      •
+                    </motion.span>
+                    <span className="ml-2">{item}</span>
                   </motion.div>
                 ))}
               </motion.div>
@@ -325,11 +467,26 @@ export const commands = {
             className="mt-4 pt-2 border-t border-gray-700"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.5 + achievementsData.length * 0.2, duration: 0.4 }}
+            transition={{ delay: 4.5 + achievementsData.length * 0.2, duration: 0.4 }}
           >
-            <div className="text-green-400 text-xs">
+            <motion.div 
+              className="text-green-400 text-xs"
+              animate={{ 
+                textShadow: [
+                  "0 0 0px #22c55e",
+                  "0 0 8px #22c55e40", 
+                  "0 0 0px #22c55e"
+                ]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 5.0 + achievementsData.length * 0.2
+              }}
+            >
               ✓ Report generated successfully. Total categories: {achievementsData.length}
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       );
