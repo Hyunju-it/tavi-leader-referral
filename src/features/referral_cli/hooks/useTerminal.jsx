@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import ConfettiBoom from 'react-confetti-boom';
 import { commands as COMMANDS } from '../constants/commands.jsx';
 import { devCommands } from '../constants/devCommands';
-import { secretCommands } from '../constants/secretCommands';
+import { secretCommands } from '../constants/secretCommands.jsx';
 import { availableFonts } from '../utils/fonts';
 
 const allCommands = { ...COMMANDS, ...devCommands, ...secretCommands };
@@ -56,45 +56,104 @@ export const useTerminal = () => {
 
     if (output === "__JOURNEY__") {
       const journeyData = [
-        "🎯 혁신/개선",
-        "🎯 자동화/최적화",
-        "🎯 신규 기능 런칭",
-        "🎯 프로세스/품질 개선",
-        "🎯 외부 임팩트/고객 피드백",
+        { icon: "🌱", text: "시작과 탐색" },
+        { icon: "🚀", text: "혁신과 도전" },
+        { icon: "⚡", text: "최적화와 개선" },
+        { icon: "🤝", text: "협업과 소통" },
+        { icon: "🌟", text: "성과와 성장" },
       ];
 
       const journeyElement = (
-        <div className="flex flex-col items-start py-6 w-full">
-          <span className="text-lg font-bold text-[#93c5fd] mb-6">🚀 여정 타임라인</span>
-          <div className="relative w-full flex items-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="py-8 max-w-4xl mx-auto"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-center mb-10"
+          >
             <motion.div
-              className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-600"
+              className="text-2xl font-bold text-[#93c5fd] mb-4"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              🗺️ 함께한 성장의 여정
+            </motion.div>
+            <div className="text-purple-300">각 단계마다 남긴 발자취들...</div>
+          </motion.div>
+
+          <div className="relative">
+            <motion.div
+              className="absolute top-1/2 left-8 right-8 h-1 bg-gradient-to-r from-purple-500/30 via-blue-500/50 to-pink-500/30 rounded-full"
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
-              transition={{ duration: 2 }}
+              transition={{ delay: 0.5, duration: 2, ease: "easeInOut" }}
             />
-            <div className="flex justify-between w-full">
+            
+            <div className="flex justify-between items-center px-8">
               {journeyData.map((stage, i) => (
                 <motion.div
                   key={i}
-                  className="flex flex-col items-center w-1/5"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.6 }}
+                  className="relative flex flex-col items-center z-10"
+                  initial={{ opacity: 0, y: 30, scale: 0.8 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    delay: 0.8 + i * 0.3,
+                    type: "spring",
+                    stiffness: 100,
+                    damping: 15
+                  }}
                 >
-                  <motion.span
-                    className="text-yellow-400 text-2xl mb-2"
-                    animate={{ y: [0, -6, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.3 }}
+                  <motion.div
+                    className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500/80 via-blue-500/80 to-pink-500/80 flex items-center justify-center mb-4 shadow-lg"
+                    animate={{ 
+                      boxShadow: [
+                        "0 4px 20px rgba(147, 197, 253, 0.3)",
+                        "0 8px 30px rgba(147, 197, 253, 0.6)", 
+                        "0 4px 20px rgba(147, 197, 253, 0.3)"
+                      ]
+                    }}
+                    transition={{ repeat: Infinity, duration: 2, delay: i * 0.4 }}
+                    whileHover={{ scale: 1.15 }}
                   >
-                    ★
-                  </motion.span>
-                  <span className="text-[#93c5fd] font-semibold text-sm text-center">{stage}</span>
+                    <motion.span
+                      className="text-2xl"
+                      animate={{ 
+                        y: [0, -3, 0],
+                        rotate: [0, 5, -5, 0]
+                      }}
+                      transition={{ 
+                        repeat: Infinity, 
+                        duration: 2, 
+                        delay: i * 0.5 
+                      }}
+                    >
+                      {stage.icon}
+                    </motion.span>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 + i * 0.3 }}
+                    className="text-center"
+                  >
+                    <div className="text-[#93c5fd] font-bold text-sm mb-1">{stage.text}</div>
+                    <motion.div
+                      className="w-2 h-2 mx-auto rounded-full bg-yellow-400"
+                      animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+                      transition={{ repeat: Infinity, duration: 1.5, delay: i * 0.2 }}
+                    />
+                  </motion.div>
                 </motion.div>
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       );
       setLines([`✦ > ${cmd}`, journeyElement]);
       return;
@@ -114,7 +173,7 @@ export const useTerminal = () => {
 
       const impactElement = (
         <div className="flex flex-col items-start py-6 w-full">
-          <span className="text-lg font-bold text-[#93c5fd] mb-6">✨ Impact Timeline</span>
+          <span className="text-lg font-bold text-[#93c5fd] mb-6">💫 조직에 남긴 흔적들</span>
           <div className="flex flex-col space-y-4">
             {impactData.map((item, i) => (
               <motion.div

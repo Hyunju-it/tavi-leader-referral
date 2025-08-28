@@ -15,78 +15,77 @@ export const commands = {
         return str + " ".repeat(Math.max(0, targetWidth - len));
       };
 
-      const width = 60; // 테두리 안쪽 콘텐츠 폭(표시폭 기준)
-      const top    = "╔" + "═".repeat(width) + "╗";
-      const middle = "╚" + "═".repeat(width) + "╝";
-      const bottom = "╚" + "═".repeat(width) + "═";
-
-      // 헤더
-      const header = "║" + padRight(" Commands", width) + "║";
-
-      // 왼쪽 컬럼 폭(표시폭 기준)
-      const cmdCol = 15; // command 이름 영역
-      const arrow  = " →    ";
-
       const rows = Object.entries(commands)
           .filter(([name]) => name !== "help")
-          .map(([name, { description }], index) => {
-            const left = "  " + padRight(name, cmdCol); // "  " + command 15칸
-            const line = `${left}${arrow}${description}`;
-            const content = "║" + padRight(line, width);
-            
-            return (
-              <motion.div
-                key={name}
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ 
-                  delay: index * 0.1, 
-                  type: "spring", 
-                  stiffness: 100 
-                }}
-                className="text-[#d0cde1] hover:text-[#93c5fd] transition-colors duration-200"
-              >
-                {content}
-              </motion.div>
-            );
+          .map(([name, { description }]) => {
+            const left = "  " + padRight(name, 15);
+            const line = `${left} →    ${description}`;
+            return line;
           });
 
       return (
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="font-mono whitespace-pre-line"
+          transition={{ duration: 0.6, type: "spring", stiffness: 80 }}
+          className="max-w-3xl mx-auto"
         >
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ delay: 0.2 }}
+            className="text-center mb-6"
           >
-            {top}
+            <motion.div
+              className="text-2xl font-bold text-[#93c5fd] mb-2"
+              animate={{ textShadow: ["0 0 10px #93c5fd", "0 0 20px #93c5fd", "0 0 10px #93c5fd"] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              🗺️ 여정 탐색 가이드 🗺️
+            </motion.div>
+            <div className="text-sm text-purple-300">함께 했던 시간들을 되돌아보며...</div>
           </motion.div>
+
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.3 }}
-            className="text-[#93c5fd] font-bold"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+            className="bg-gradient-to-br from-purple-900/10 via-blue-900/10 to-pink-900/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6"
           >
-            {header}
+            <div className="font-mono text-sm space-y-1">
+              {[
+                "┌─────────────────────────────────────────────────────────────┐",
+                "│                    🌟 여정의 발자취 🌟                    │", 
+                "├─────────────────────────────────────────────────────────────┤",
+                ...rows.map(row => `│ ${padRight(row, 58)} │`),
+                "└─────────────────────────────────────────────────────────────┘"
+              ].map((line, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6 + i * 0.05 }}
+                  className={i === 1 ? "text-[#93c5fd] font-bold" : "text-[#d0cde1]"}
+                >
+                  {line}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
+
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.3 }}
+            transition={{ delay: 1.2 }}
+            className="text-center mt-6"
           >
-            {middle}
-          </motion.div>
-          <div>{rows}</div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.3 }}
-          >
-            {bottom}
+            <motion.div
+              className="text-xs text-purple-300"
+              animate={{ opacity: [0.4, 0.8, 0.4] }}
+              transition={{ repeat: Infinity, duration: 2.5 }}
+            >
+              ✨ Tab으로 자동완성 • Enter로 여정 시작 ✨
+            </motion.div>
           </motion.div>
         </motion.div>
       );
