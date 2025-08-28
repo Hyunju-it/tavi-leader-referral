@@ -1,10 +1,22 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Typed from 'typed.js';
 
 export default function TerminalOutput({ lines, typedOutput, setLines, setTypedOutput }) {
   const outputRef = useRef(null);
+  const [lineKeys, setLineKeys] = useState([]);
+
+  // 라인이 추가될 때마다 새로운 key 생성
+  useEffect(() => {
+    if (lines.length > lineKeys.length) {
+      const newKeys = [];
+      for (let i = lineKeys.length; i < lines.length; i++) {
+        newKeys.push(`line-${Date.now()}-${i}-${Math.random()}`);
+      }
+      setLineKeys(prev => [...prev, ...newKeys]);
+    }
+  }, [lines.length, lineKeys.length]);
 
   // 스크롤 자동 추적 해제
 
@@ -31,9 +43,11 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
     <div ref={outputRef} className="flex-1 overflow-y-auto px-3 md:px-4 py-3 text-gray-300 bg-gray-950 font-mono">
       {lines.map((line, i) => {
         const isInputLine = typeof line === 'string' && line.startsWith('$ ');
+        // 각 라인에 고유하고 안정적인 key 사용
+        const lineKey = lineKeys[i] || `fallback-${i}`;
         return (
           <motion.div
-            key={i}
+            key={lineKey}
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.2 }}
