@@ -1,4 +1,3 @@
-import './styles/App.css'
 import ReferralCLI from "./features/referral_cli/ReferralCLI.jsx"
 
 function App() {
