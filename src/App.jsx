@@ -1,5 +1,4 @@
-import './App.css'
-import ReferralCLI from "./ReferralCLI.jsx"
+import ReferralCLI from "./features/referral_cli/ReferralCLI.jsx"
 
 function App() {
 
