@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import ConfettiBoom from 'react-confetti-boom';
-import { commands as COMMANDS } from '../constants/commands';
+import { commands as COMMANDS } from '../constants/commands.jsx';
 import { devCommands } from '../constants/devCommands';
 import { secretCommands } from '../constants/secretCommands';
 import { availableFonts } from '../utils/fonts';
