@@ -85,14 +85,6 @@ export const useTerminal = () => {
     }
 
     if (output === "__ABOUT__") {
-      const journeyData = [
-        { icon: "🌱", text: "시작과 탐색" },
-        { icon: "🚀", text: "혁신과 도전" },
-        { icon: "⚡", text: "최적화와 개선" },
-        { icon: "🤝", text: "협업과 소통" },
-        { icon: "🌟", text: "성과와 성장" },
-      ];
-
       const aboutElement = (
         <motion.div
           initial={{ opacity: 0 }}
