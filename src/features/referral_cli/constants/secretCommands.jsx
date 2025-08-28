@@ -1,5 +1,3 @@
-import { motion } from 'framer-motion';
-
 export const secretCommands = {
   sorry: {
     description: "전하지 못했던 미안함을 조심스레 풀어놓습니다.",
@@ -25,112 +23,33 @@ export const secretCommands = {
       ];
 
       return (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="py-8 max-w-4xl mx-auto"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 60 }}
-            className="text-center mb-12"
-          >
-            <motion.div
-              className="text-3xl font-bold mb-6 text-red-400"
-              animate={{ 
-                textShadow: [
-                  "0 0 10px rgba(248, 113, 113, 0.5)",
-                  "0 0 20px rgba(248, 113, 113, 0.8)",
-                  "0 0 10px rgba(248, 113, 113, 0.5)"
-                ]
-              }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              😢 미안함 😢
-            </motion.div>
-            <motion.div
-              className="text-lg text-red-300"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ repeat: Infinity, duration: 2.5 }}
-            >
-              전하지 못했던 마음을...
-            </motion.div>
-          </motion.div>
+        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+          <div className="mb-4">
+            <div className="text-red-400 font-semibold">Apology Message</div>
+            <div className="text-gray-400 text-xs">Personal confession | Status: UNDELIVERED</div>
+          </div>
 
-          <div className="space-y-6">
+          <div className="space-y-3">
             {sorryMessages.map((message, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: -50, rotateY: 45 }}
-                animate={{ opacity: 1, x: 0, rotateY: 0 }}
-                transition={{ 
-                  delay: 0.8 + i * 0.15,
-                  type: "spring",
-                  stiffness: 80,
-                  damping: 25
-                }}
-                className="relative p-6 rounded-xl bg-gradient-to-r from-red-900/20 via-pink-900/20 to-purple-900/20 border border-red-500/30 hover:border-red-400/50 transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.01,
-                  x: 10,
-                  boxShadow: "0 10px 30px rgba(248, 113, 113, 0.1)" 
-                }}
-              >
-                <motion.div
-                  className="absolute -left-3 top-4"
-                  animate={{ 
-                    y: [0, -3, 0],
-                    opacity: [0.4, 0.8, 0.4],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{ 
-                    repeat: Infinity, 
-                    duration: 2.5,
-                    delay: i * 0.2 
-                  }}
-                >
-                  <div className="w-6 h-6 rounded-full bg-gradient-to-r from-red-500/60 to-pink-500/60 flex items-center justify-center">
-                    <motion.span 
-                      className="text-xs"
-                      animate={{ rotate: [0, 5, -5, 0] }}
-                      transition={{ repeat: Infinity, duration: 2 }}
-                    >
-                      💧
-                    </motion.span>
-                  </div>
-                </motion.div>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 + i * 0.15 }}
-                  className="text-[#d0cde1] leading-relaxed text-sm pl-6"
-                >
+              <div key={i} className="flex">
+                <div className="text-red-400 mr-3 font-mono text-xs mt-1 shrink-0">
+                  [{(i + 1).toString().padStart(2, '0')}]
+                </div>
+                <div className="text-gray-300 leading-relaxed">
                   {message}
-                </motion.p>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 4, type: "spring", stiffness: 80 }}
-            className="text-center mt-12"
-          >
-            <motion.div
-              className="text-2xl mb-4"
-              animate={{ 
-                scale: [1, 1.2, 1],
-                opacity: [0.7, 1, 0.7]
-              }}
-              transition={{ repeat: Infinity, duration: 3 }}
-            >
-              🙏
-            </motion.div>
-          </motion.div>
-        </motion.div>
+          <div className="mt-6 pt-2 border-t border-gray-700">
+            <div className="text-center">
+              <div className="text-red-400 text-xs">
+                ◆ 진심으로 죄송합니다 ◆
+              </div>
+            </div>
+          </div>
+        </div>
       );
     },
   },
@@ -141,7 +60,7 @@ export const secretCommands = {
         "광원님, 제가 늘 신중하다 못해 겁에 질려 주저할 때마다, 누구보다 침착하게 제 옆에 서서 함께 바라봐 주셨습니다.",
         "저 혼자서 모든 걸 감당해야 한다고 착각했을 때도, 광원님은 조용히 균형을 잡아주셨습니다.",
         "그 순간마다 제 마음은 한결 가벼워졌고, 혼자가 아니라는 든든함을 깊이 느낄 수 있었습니다.",
-        "저는 광원님을 통해 커뮤니케케이션과 협업이 단순한 기술이 아니라, 팀을 움직이는 원동력이라는 걸 배웠습니다.",
+        "저는 광원님을 통해 커뮤니케이션과 협업이 단순한 기술이 아니라, 팀을 움직이는 원동력이라는 걸 배웠습니다.",
         "리소스를 파악하고, 요구사항을 정리하며, 팀의 역사를 기억하고, 결국 결정을 내리는 그 모든 과정을 책임지는 모습은 제게 큰 울림이었습니다.",
         "그 과정에서 광원님은 단순히 일을 해결한 것이 아니라, 모두가 같은 방향을 바라보도록 만들어주셨습니다.",
         "지금까지 함께한 동료들 중에서도 이런 역량은 광원님이 단연 최고였습니다.",
@@ -161,119 +80,33 @@ export const secretCommands = {
       ];
 
       return (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="py-8 max-w-4xl mx-auto"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 60 }}
-            className="text-center mb-12"
-          >
-            <motion.div
-              className="text-3xl font-bold mb-6 text-green-400"
-              animate={{ 
-                textShadow: [
-                  "0 0 10px rgba(34, 197, 94, 0.5)",
-                  "0 0 20px rgba(34, 197, 94, 0.8)",
-                  "0 0 10px rgba(34, 197, 94, 0.5)"
-                ]
-              }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              🙏 감사함 🙏
-            </motion.div>
-            <motion.div
-              className="text-lg text-blue-300"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ repeat: Infinity, duration: 2.5 }}
-            >
-              진심으로 전하고 싶은 마음을...
-            </motion.div>
-          </motion.div>
+        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+          <div className="mb-4">
+            <div className="text-green-400 font-semibold">Gratitude Message</div>
+            <div className="text-gray-400 text-xs">Personal testimony | Status: HEARTFELT</div>
+          </div>
 
-          <div className="space-y-6">
+          <div className="space-y-3">
             {thankYouMessages.map((message, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, x: 50, rotateY: -45 }}
-                animate={{ opacity: 1, x: 0, rotateY: 0 }}
-                transition={{ 
-                  delay: 0.8 + i * 0.15,
-                  type: "spring",
-                  stiffness: 80,
-                  damping: 25
-                }}
-                className="relative p-6 rounded-xl bg-gradient-to-r from-blue-900/20 via-cyan-900/20 to-green-900/20 border border-blue-500/30 hover:border-blue-400/50 transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.01,
-                  x: -10,
-                  boxShadow: "0 10px 30px rgba(96, 165, 250, 0.1)" 
-                }}
-              >
-                <motion.div
-                  className="absolute -right-3 top-4"
-                  animate={{ 
-                    y: [0, -5, 0],
-                    opacity: [0.5, 1, 0.5],
-                    rotate: [0, 10, -10, 0]
-                  }}
-                  transition={{ 
-                    repeat: Infinity, 
-                    duration: 2.5,
-                    delay: i * 0.2 
-                  }}
-                >
-                  <motion.div 
-                    className="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500/60 to-cyan-500/60 flex items-center justify-center"
-                    whileHover={{ scale: 1.3 }}
-                  >
-                    <span className="text-xs">💙</span>
-                  </motion.div>
-                </motion.div>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 + i * 0.15 }}
-                  className="text-[#d0cde1] leading-relaxed text-sm pr-6"
-                >
+              <div key={i} className="flex">
+                <div className="text-green-400 mr-3 font-mono text-xs mt-1 shrink-0">
+                  [{(i + 1).toString().padStart(2, '0')}]
+                </div>
+                <div className="text-gray-300 leading-relaxed">
                   {message}
-                </motion.p>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 4, type: "spring", stiffness: 80 }}
-            className="text-center mt-12"
-          >
-            <motion.div
-              className="text-4xl mb-4"
-              animate={{ 
-                scale: [1, 1.3, 1],
-                rotate: [0, 10, -10, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              💝
-            </motion.div>
-            <motion.p
-              className="text-[#93c5fd] text-lg font-bold"
-              animate={{ 
-                scale: [1, 1.05, 1],
-                opacity: [0.8, 1, 0.8] 
-              }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              마음 깊이 감사드립니다 🌟
-            </motion.p>
-          </motion.div>
-        </motion.div>
+          <div className="mt-6 pt-2 border-t border-gray-700">
+            <div className="text-center">
+              <div className="text-green-400 text-xs">
+                ◆ 마음 깊이 감사드립니다 ◆
+              </div>
+            </div>
+          </div>
+        </div>
       );
     },
   },

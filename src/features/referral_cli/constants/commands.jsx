@@ -1,11 +1,9 @@
 import stringWidth from "string-width";
-import { motion } from 'framer-motion';
 
 export const commands = {
   help: {
     description: "사용 가능한 모든 명령어를 보여줍니다.",
     execute: () => {
-
       // 표시폭(terminal columns) 계산 헬퍼
       const sw = (s) => stringWidth(s, { ambiguousIsNarrow: true });
 
@@ -24,161 +22,212 @@ export const commands = {
           });
 
       return (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, type: "spring", stiffness: 80 }}
-          className="max-w-3xl mx-auto"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mb-6"
-          >
-            <motion.div
-              className="text-2xl font-bold text-[#93c5fd] mb-2"
-              animate={{ textShadow: ["0 0 10px #93c5fd", "0 0 20px #93c5fd", "0 0 10px #93c5fd"] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              🗺️ 여정 탐색 가이드 🗺️
-            </motion.div>
-            <div className="text-sm text-purple-300">함께 했던 시간들을 되돌아보며...</div>
-          </motion.div>
+        <div className="max-w-4xl mx-auto font-mono leading-relaxed space-y-4">
+          <div className="mb-4">
+            <div className="text-cyan-400 font-semibold mb-1">
+              Available Commands:
+            </div>
+            <div className="text-gray-400 text-xs">
+              Use 'command_name' to execute. Tab for autocomplete.
+            </div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="bg-gradient-to-br from-purple-900/10 via-blue-900/10 to-pink-900/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6"
-          >
-            <div className="font-mono text-sm space-y-1">
-              {[
-                "┌─────────────────────────────────────────────────────────────┐",
-                "│                    🌟 여정의 발자취 🌟                    │", 
-                "├─────────────────────────────────────────────────────────────┤",
-                ...rows.map(row => `│ ${padRight(row, 58)} │`),
-                "└─────────────────────────────────────────────────────────────┘"
-              ].map((line, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.6 + i * 0.05 }}
-                  className={i === 1 ? "text-[#93c5fd] font-bold" : "text-[#d0cde1]"}
-                >
-                  {line}
-                </motion.div>
+          <div className="bg-gray-950 p-3 border-l-2 border-cyan-500">
+            <div className="space-y-0">
+              {rows.map((row, i) => (
+                <div key={i} className="text-gray-300 py-0.5">
+                  {row}
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="text-center mt-6"
-          >
-            <motion.div
-              className="text-xs text-purple-300"
-              animate={{ opacity: [0.4, 0.8, 0.4] }}
-              transition={{ repeat: Infinity, duration: 2.5 }}
-            >
-              ✨ Tab으로 자동완성 • Enter로 여정 시작 ✨
-            </motion.div>
-          </motion.div>
-        </motion.div>
+          <div className="mt-3 text-xs text-gray-500">
+            → Type a command name and press Enter to execute
+          </div>
+        </div>
       );
     },
   },
   journey: {
     description: "선배의 여정을 돌아봅니다.",
-    execute: () => "__JOURNEY__",
+    execute: () => {
+      const journeyData = [
+        {
+          period: "2023.03 - 2024.08",
+          role: "백엔드 개발자",
+          team: "여행 플랫폼 서비스팀",
+          highlights: [
+            "신입으로 입사하여 복잡한 여행 도메인 빠르게 습득",
+            "기존 레거시 시스템 이해 및 점진적 개선 작업 참여",
+            "팀 내 협업 프로세스와 코드 리뷰 문화에 적응"
+          ]
+        },
+        {
+          period: "2024.04 - 2024.08",
+          role: "주니어 백엔드 개발자",
+          team: "여행 플랫폼 서비스팀",
+          highlights: [
+            "서광원 시니어와 함께 다양한 프로젝트 협업",
+            "Kakao 연동, Tripbtoz 파트너 연동 등 외부 시스템 통합",
+            "운영 이슈 해결 및 시스템 안정성 개선 경험 축적"
+          ]
+        }
+      ];
+
+      return (
+        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+          <div className="mb-4">
+            <div className="text-cyan-400 font-semibold">Career Journey Report</div>
+            <div className="text-gray-400 text-xs">Subject: 서광원 | Timeline: Professional Experience</div>
+          </div>
+
+          {journeyData.map((period, i) => (
+            <div key={i} className="mb-6">
+              <div className="mb-2">
+                <div className="text-yellow-400 font-semibold">
+                  {period.period}
+                </div>
+                <div className="text-white text-xs">
+                  {period.role} @ {period.team}
+                </div>
+              </div>
+              
+              <div className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2">
+                {period.highlights.map((highlight, j) => (
+                  <div key={j} className="text-gray-300 py-0.5">
+                    • {highlight}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="mt-6 pt-2 border-t border-gray-700">
+            <div className="text-cyan-400 text-xs">
+              ✓ Career progression documented. Total experience: 1.5+ years
+            </div>
+          </div>
+        </div>
+      );
+    },
   },
   impact: {
     description: "조직에 남긴 대표적인 성과를 기록합니다.",
-    execute: () => "__IMPACT__",
+    execute: () => {
+      const impactData = [
+        {
+          category: "REVENUE_GROWTH",
+          impact: "매출 성장 기여",
+          details: [
+            "신규 채널 확장 프로젝트 6건을 통한 매출 다각화",
+            "파트너 연동 시스템으로 수익원 확장",
+            "서비스 안정성 향상으로 고객 이탈 방지"
+          ]
+        },
+        {
+          category: "OPERATIONAL_EFFICIENCY",
+          impact: "운영 효율성 극대화",
+          details: [
+            "운영 프로세스 자동화 10건으로 리소스 절약",
+            "SQL 쿼리 최적화로 응답속도 90% 단축",
+            "재작업 최소화로 개발 생산성 향상"
+          ]
+        },
+        {
+          category: "SYSTEM_RELIABILITY",
+          impact: "시스템 안정성 강화",
+          details: [
+            "마감/취소/정산 로직 강화로 오류 방지",
+            "트래픽 처리 개선으로 서비스 중단 최소화",
+            "오류 예방 시스템 구축으로 사전 대응 체계 확립"
+          ]
+        },
+        {
+          category: "CUSTOMER_SATISFACTION",
+          impact: "고객 만족도 개선",
+          details: [
+            "고객 피드백 반영 9건으로 사용성 향상",
+            "파트너 요구사항 적극 수용으로 파트너십 강화",
+            "서비스 확장 기능 7건으로 고객 선택권 확대"
+          ]
+        }
+      ];
+
+      return (
+        <div className="font-mono leading-relaxed max-w-5xl mx-auto space-y-4">
+          <div className="mb-4">
+            <div className="text-cyan-400 font-semibold">Business Impact Analysis</div>
+            <div className="text-gray-400 text-xs">Subject: 서광원 | Period: 2023.03 - 2024.08</div>
+          </div>
+
+          {impactData.map((item, i) => (
+            <div key={i} className="mb-4">
+              <div className="mb-1">
+                <div className="text-green-400 font-semibold">
+                  {item.category}: {item.impact}
+                </div>
+              </div>
+              
+              <div className="bg-gray-950 p-3 border-l-2 border-green-500 ml-2">
+                {item.details.map((detail, j) => (
+                  <div key={j} className="text-gray-300 py-0.5">
+                    • {detail}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="mt-6 pt-2 border-t border-gray-700">
+            <div className="text-green-400 text-xs">
+              ✓ Impact assessment complete. Overall contribution: SIGNIFICANT POSITIVE
+            </div>
+          </div>
+        </div>
+      );
+    },
   },
   achievements: {
     description: "세부적인 업적과 기여를 나열합니다.",
     execute: () => {
       const achievementsData = [
-        { category: "🚀 프로젝트 런칭", items: ["신규 채널 확장 프로젝트 6건", "매출 성장 견인"] },
-        { category: "⚡ 성능 최적화", items: ["SQL 쿼리 최적화 4건", "트래픽 처리 개선 4건", "응답속도 최대 90% 단축"] },
-        { category: "🤖 자동화·최적화", items: ["운영 프로세스 자동화 10건", "리소스 절감 및 오류 방지", "재작업 최소화"] },
-        { category: "💡 신규 기능 개발", items: ["Kakao 연동 시스템", "Tripbtoz 파트너 연동", "서비스 확장 기능 7건"] },
-        { category: "🛠️ 프로세스 개선", items: ["마감/취소/정산 로직 강화", "운영 효율화 12건", "시스템 안정성 향상"] },
-        { category: "🔍 품질 향상", items: ["고객 피드백 반영 9건", "파트너 요구사항 수용", "오류 예방 시스템 구축"] }
+        { category: "PROJECT_LAUNCH", items: ["신규 채널 확장 프로젝트 6건", "매출 성장 견인"] },
+        { category: "PERFORMANCE_OPT", items: ["SQL 쿼리 최적화 4건", "트래픽 처리 개선 4건", "응답속도 최대 90% 단축"] },
+        { category: "AUTOMATION", items: ["운영 프로세스 자동화 10건", "리소스 절감 및 오류 방지", "재작업 최소화"] },
+        { category: "NEW_FEATURES", items: ["Kakao 연동 시스템", "Tripbtoz 파트너 연동", "서비스 확장 기능 7건"] },
+        { category: "PROCESS_IMPROVE", items: ["마감/취소/정산 로직 강화", "운영 효율화 12건", "시스템 안정성 향상"] },
+        { category: "QUALITY_ENHANCE", items: ["고객 피드백 반영 9건", "파트너 요구사항 수용", "오류 예방 시스템 구축"] }
       ];
 
       return (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="py-6"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mb-8"
-          >
-            <motion.span
-              className="text-2xl font-bold text-[#93c5fd]"
-              animate={{ textShadow: ["0 0 10px #93c5fd", "0 0 20px #93c5fd", "0 0 10px #93c5fd"] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              🏆 주요 업적 & 기여 🏆
-            </motion.span>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {achievementsData.map((achievement, i) => (
-              <motion.div
-                key={achievement.category}
-                initial={{ opacity: 0, scale: 0.9, rotateY: 90 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{ 
-                  delay: i * 0.15, 
-                  type: "spring", 
-                  stiffness: 100,
-                  duration: 0.6 
-                }}
-                className="p-4 rounded-lg bg-gradient-to-br from-blue-900/40 to-purple-900/40 border border-blue-500/30 hover:border-blue-400/50 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
-                whileHover={{ y: -5, scale: 1.02 }}
-              >
-                <motion.div
-                  className="text-lg font-bold mb-3 text-[#93c5fd]"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ repeat: Infinity, duration: 3, delay: i * 0.5 }}
-                >
-                  {achievement.category}
-                </motion.div>
-                <div className="space-y-2">
-                  {achievement.items.map((item, j) => (
-                    <motion.div
-                      key={j}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + i * 0.15 + j * 0.1 }}
-                      className="text-[#d0cde1] text-sm flex items-center"
-                    >
-                      <motion.span
-                        className="text-yellow-400 mr-2"
-                        animate={{ rotate: [0, 360] }}
-                        transition={{ repeat: Infinity, duration: 4, delay: j * 0.5 }}
-                      >
-                        ✨
-                      </motion.span>
-                      {item}
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+        <div className="font-mono leading-relaxed max-w-5xl mx-auto space-y-4">
+          <div className="mb-4">
+            <div className="text-cyan-400 font-semibold">Achievements Report</div>
+            <div className="text-gray-400 text-xs">Generated: {new Date().toISOString().split('T')[0]}</div>
           </div>
-        </motion.div>
+
+          {achievementsData.map((achievement, i) => (
+            <div key={i} className="mb-4">
+              <div className="text-yellow-400 font-semibold mb-1">
+                {achievement.category}:
+              </div>
+              <div className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2">
+                {achievement.items.map((item, j) => (
+                  <div key={j} className="text-gray-300 py-0.5">
+                    • {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="mt-4 pt-2 border-t border-gray-700">
+            <div className="text-green-400 text-xs">
+              ✓ Report generated successfully. Total categories: {achievementsData.length}
+            </div>
+          </div>
+        </div>
       );
     },
   },
@@ -186,89 +235,56 @@ export const commands = {
     description: "이 분의 역량과 추천 사유를 기록합니다.",
     execute: () => {
       const strengthsData = [
-        { emoji: "💎", title: "책임감", desc: ["어떤 상황에서도 맡은 일을 끝까지 책임지고 완수", "동료들에게 안정감과 신뢰를 주는 든든한 리더"] },
-        { emoji: "🤝", title: "협업 & 소통", desc: ["다양한 의견을 열린 마음으로 경청하고 조율", "갈등 상황에서도 빠르게 합의점을 찾아내는 능력", "동료들의 목소리를 존중하며 모두가 기여할 수 있는 분위기 조성"] },
-        { emoji: "🧭", title: "리더십", desc: ["위기 상황에서도 침착함을 잃지 않고 방향 제시", "역할을 명확히 나눠주어 혼란 최소화, 팀의 자신감 극대화", "스스로 책임을 지되, 팀원에게 기회를 나누어 성장을 이끈 리더"] },
-        { emoji: "🌱", title: "피드백 & 코칭", desc: ["실질적이고 actionable(실행 가능한) 피드백 제공", "팀원 개개인의 강점을 살리고 부족한 점을 보완하도록 돕는 멘토", "여유가 주어질수록 팀 전체의 성장을 가속화할 분"] },
-        { emoji: "💡", title: "인간적 배려", desc: ["업무 외적으로도 동료의 상황을 세심하게 살핌", "단순한 팀워크를 넘어 \"함께 일하고 싶은 팀 분위기\"를 만들어냄"] }
+        { title: "RESPONSIBILITY", desc: ["어떤 상황에서도 맡은 일을 끝까지 책임지고 완수", "동료들에게 안정감과 신뢰를 주는 든든한 리더"] },
+        { title: "COLLABORATION", desc: ["다양한 의견을 열린 마음으로 경청하고 조율", "갈등 상황에서도 빠르게 합의점을 찾아내는 능력"] },
+        { title: "LEADERSHIP", desc: ["위기 상황에서도 침착함을 잃지 않고 방향 제시", "역할을 명확히 나눠주어 혼란 최소화, 팀의 자신감 극대화"] },
+        { title: "MENTORING", desc: ["실질적이고 actionable(실행 가능한) 피드백 제공", "팀원 개개인의 강점을 살리고 부족한 점을 보완하도록 돕는 멘토"] },
+        { title: "HUMAN_CARE", desc: ["업무 외적으로도 동료의 상황을 세심하게 살핌", "단순한 팀워크를 넘어 \"함께 일하고 싶은 팀 분위기\"를 만들어냄"] }
       ];
 
       return (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="py-6 space-y-6"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mb-8"
-          >
-            <motion.div
-              className="text-lg text-[#93c5fd] mb-4"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              ⭐ 추천서 ⭐
-            </motion.div>
-            <div className="text-[#d0cde1] leading-relaxed">
-              서광원 님은 제가 경험한 동료 중 최고의 커뮤니케이터이자 협업형 리더입니다.<br/>
-              수많은 동료들과 함께했지만, 커뮤니케이션과 협업 역량에서 서광원 님만큼 뛰어난 분은 없었습니다.<br/><br/>
-              선배님은 단순히 의견을 맞추는 수준을 넘어서, 이해관계가 다른 사람들까지 빠르게 한 방향으로 모아내는 힘이 있었습니다.
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-center mb-6"
-          >
-            <span className="text-lg font-bold text-[#93c5fd]">🌟 핵심 역량</span>
-          </motion.div>
-
-          <div className="space-y-4">
-            {strengthsData.map((strength, i) => (
-              <motion.div
-                key={strength.title}
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.6 + i * 0.2, type: "spring", stiffness: 80 }}
-                className="p-4 rounded-lg bg-gradient-to-r from-purple-900/30 to-pink-900/30 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300"
-              >
-                <motion.div
-                  className="flex items-center mb-3"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <motion.span
-                    className="text-2xl mr-3"
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2, delay: i * 0.3 }}
-                  >
-                    {strength.emoji}
-                  </motion.span>
-                  <span className="text-xl font-bold text-[#93c5fd]">{strength.title}</span>
-                </motion.div>
-                <div className="space-y-2 pl-8">
-                  {strength.desc.map((desc, j) => (
-                    <motion.div
-                      key={j}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.8 + i * 0.2 + j * 0.1 }}
-                      className="text-[#d0cde1] text-sm leading-relaxed"
-                    >
-                      • {desc}
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+          <div className="mb-4">
+            <div className="text-cyan-400 font-semibold">Recommendation Report</div>
+            <div className="text-gray-400 text-xs">Subject: 서광원 | Evaluator: 후배 개발자</div>
           </div>
-        </motion.div>
+
+          <div className="mb-6">
+            <div className="text-white font-semibold mb-2">Executive Summary:</div>
+            <div className="bg-gray-950 p-3 border-l-2 border-cyan-500">
+              <div className="text-gray-300 leading-relaxed">
+                서광원 님은 제가 경험한 동료 중 최고의 커뮤니케이터이자 협업형 리더입니다.<br/>
+                수많은 동료들과 함께했지만, 커뮤니케이션과 협업 역량에서 서광원 님만큼 뛰어난 분은 없었습니다.<br/><br/>
+                선배님은 단순히 의견을 맞추는 수준을 넘어서, 이해관계가 다른 사람들까지 빠르게 한 방향으로 모아내는 힘이 있었습니다.
+              </div>
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <div className="text-white font-semibold mb-2">Core Competencies:</div>
+          </div>
+
+          {strengthsData.map((strength, i) => (
+            <div key={i} className="mb-4">
+              <div className="text-green-400 font-semibold mb-1">
+                {strength.title}:
+              </div>
+              <div className="bg-gray-950 p-3 border-l-2 border-green-500 ml-2">
+                {strength.desc.map((desc, j) => (
+                  <div key={j} className="text-gray-300 py-0.5">
+                    • {desc}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="mt-6 pt-2 border-t border-gray-700">
+            <div className="text-green-400 text-xs">
+              ✓ Recommendation: STRONGLY POSITIVE | Confidence: HIGH
+            </div>
+          </div>
+        </div>
       );
     },
   },
@@ -285,107 +301,33 @@ export const commands = {
       ];
 
       return (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="py-8 max-w-4xl mx-auto"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.3, type: "spring", stiffness: 80 }}
-            className="text-center mb-12"
-          >
-            <motion.div
-              className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-400 to-yellow-400 bg-clip-text text-transparent"
-              animate={{ 
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{ repeat: Infinity, duration: 3 }}
-            >
-              💝 에필로그 💝
-            </motion.div>
-            <motion.div
-              className="text-lg text-[#93c5fd]"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              후배의 마음을 담아...
-            </motion.div>
-          </motion.div>
+        <div className="font-mono leading-relaxed max-w-4xl mx-auto space-y-4">
+          <div className="mb-4">
+            <div className="text-cyan-400 font-semibold">Personal Message</div>
+            <div className="text-gray-400 text-xs">From: 후배 | To: 광원님</div>
+          </div>
 
-          <div className="space-y-8">
+          <div className="space-y-4">
             {messages.map((message, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30, rotateX: 45 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{ 
-                  delay: 0.6 + i * 0.4,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 20
-                }}
-                className="relative p-6 rounded-xl bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-pink-900/20 border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300"
-                whileHover={{ 
-                  scale: 1.02, 
-                  boxShadow: "0 10px 30px rgba(147, 197, 253, 0.2)" 
-                }}
-              >
-                <motion.div
-                  className="absolute -left-4 top-1/2 transform -translate-y-1/2"
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 360] 
-                  }}
-                  transition={{ 
-                    repeat: Infinity, 
-                    duration: 3,
-                    delay: i * 0.5 
-                  }}
-                >
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-bold">
-                    {i + 1}
-                  </div>
-                </motion.div>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.8 + i * 0.4 }}
-                  className="text-[#d0cde1] leading-relaxed text-base pl-8"
-                >
+              <div key={i} className="flex">
+                <div className="text-yellow-400 mr-3 font-mono text-xs mt-1">
+                  [{(i + 1).toString().padStart(2, '0')}]
+                </div>
+                <div className="text-gray-300 leading-relaxed flex-1">
                   {message}
-                </motion.p>
-              </motion.div>
+                </div>
+              </div>
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3, type: "spring", stiffness: 80 }}
-            className="text-center mt-12"
-          >
-            <motion.div
-              className="text-2xl"
-              animate={{ 
-                scale: [1, 1.1, 1],
-                rotate: [0, 5, -5, 0]
-              }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              🌟
-            </motion.div>
-            <motion.p
-              className="text-[#93c5fd] mt-4 font-semibold"
-              animate={{ opacity: [0.6, 1, 0.6] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              언제나 응원하고 있습니다! 💪
-            </motion.p>
-          </motion.div>
-        </motion.div>
+          <div className="mt-6 pt-2 border-t border-gray-700">
+            <div className="text-center">
+              <div className="text-magenta-400 text-xs">
+                ◆ 언제나 응원하고 있습니다 ◆
+              </div>
+            </div>
+          </div>
+        </div>
       );
     },
   }
