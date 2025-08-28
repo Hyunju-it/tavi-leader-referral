@@ -330,5 +330,70 @@ export const commands = {
         </div>
       );
     },
+  },
+  
+  impactdetails: {
+    description: "상세한 프로젝트 임팩트 내역을 카테고리별로 출력합니다.",
+    execute: async () => {
+      try {
+        const impactData = await import('../constants/impact.json');
+        const data = impactData.default || impactData;
+        
+        return (
+          <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
+            <div className="mb-4">
+              <div className="text-cyan-400 font-semibold">Detailed Impact Report</div>
+              <div className="text-gray-400 text-xs">Source: impact.json | Categories: {data.impact?.length || 0}</div>
+            </div>
+
+            {data.impact?.map((category, i) => (
+              <div key={i} className="mb-6">
+                <div className="mb-2">
+                  <div className="text-yellow-400 font-semibold">
+                    {category.category}
+                  </div>
+                  <div className="text-gray-400 text-xs">
+                    Items: {category.items?.length || 0}
+                  </div>
+                </div>
+                
+                <div className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2">
+                  {category.items?.map((item, j) => (
+                    <div key={j} className="mb-3 pb-2 border-b border-gray-800 last:border-b-0 last:mb-0 last:pb-0">
+                      <div className="text-green-400 font-medium mb-1">
+                        • {item.title}
+                      </div>
+                      <div className="text-gray-300 text-sm ml-2">
+                        {item.description}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div className="mt-6 pt-2 border-t border-gray-700">
+              <div className="text-cyan-400 text-xs">
+                ✓ Detailed impact data loaded successfully. Use 'impact' for summary view.
+              </div>
+            </div>
+          </div>
+        );
+      } catch (error) {
+        return (
+          <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
+            <div className="mb-4">
+              <div className="text-red-400 font-semibold">Error Loading Impact Data</div>
+              <div className="text-gray-400 text-xs">Failed to load impact.json</div>
+            </div>
+            <div className="bg-gray-950 p-3 border-l-2 border-red-500">
+              <div className="text-red-300">
+                Error: {error.message}
+              </div>
+            </div>
+          </div>
+        );
+      }
+    },
   }
 };
