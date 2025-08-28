@@ -12,7 +12,7 @@ export default function ReferralCLI() {
   return (
     <div className="relative min-h-screen text-[#d0cde1] font-mono flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] animate-gradient -z-20"></div>
-      <StarryBackground />
+      <StarryBackground currentCommand={terminalProps.currentCommand} />
       <TerminalWindow {...terminalProps} />
       {terminalProps.showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50">

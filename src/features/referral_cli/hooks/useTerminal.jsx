@@ -49,10 +49,15 @@ export const useTerminal = () => {
   const [typedOutput, setTypedOutput] = useState(null);
   const [font, setFont] = useState('Standard');
   const [showConfetti, setShowConfetti] = useState(false);
+  const [currentCommand, setCurrentCommand] = useState(null);
 
   const handleCommand = useCallback((cmd) => {
     const [command, ...args] = cmd.split(' ');
     const normalizedCmd = command.normalize("NFC");
+
+    // Trigger background effects for the command
+    setCurrentCommand(normalizedCmd);
+    setTimeout(() => setCurrentCommand(null), 100); // Reset after brief moment
 
     if (normalizedCmd === 'font') {
       const newFont = args[0];
@@ -253,5 +258,6 @@ export const useTerminal = () => {
     setTypedOutput,
     onKeyDown,
     showConfetti,
+    currentCommand,
   };
 };
