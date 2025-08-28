@@ -1,4 +1,5 @@
 import stringWidth from "string-width";
+import { motion } from 'framer-motion';
 
 export const commands = {
   help: {
@@ -23,28 +24,53 @@ export const commands = {
 
       return (
         <div className="max-w-4xl mx-2 md:mx-auto font-mono leading-relaxed space-y-4">
-          <div className="mb-4">
+          <motion.div 
+            className="mb-4"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <div className="text-cyan-400 font-semibold mb-1">
               Available Commands:
             </div>
             <div className="text-gray-400 text-xs">
               Use 'command_name' to execute. Tab for autocomplete.
             </div>
-          </div>
+          </motion.div>
 
-          <div className="bg-gray-950 p-3 border-l-2 border-cyan-500">
+          <motion.div 
+            className="bg-gray-950 p-3 border-l-2 border-cyan-500"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
             <div className="space-y-0">
               {rows.map((row, i) => (
-                <div key={i} className="text-gray-300 py-0.5">
+                <motion.div 
+                  key={i} 
+                  className="text-gray-300 py-0.5"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ 
+                    duration: 0.2, 
+                    delay: 0.4 + i * 0.08,
+                    ease: "easeOut"
+                  }}
+                >
                   {row}
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div className="mt-3 text-xs text-gray-500">
+          <motion.div 
+            className="mt-3 text-xs text-gray-500"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, delay: 0.8 + rows.length * 0.08 }}
+          >
             → Type a command name and press Enter to execute
-          </div>
+          </motion.div>
         </div>
       );
     },
@@ -83,24 +109,54 @@ export const commands = {
           </div>
 
           {journeyData.map((period, i) => (
-            <div key={i} className="mb-6">
-              <div className="mb-2">
+            <motion.div 
+              key={i} 
+              className="mb-6"
+              initial={{ opacity: 0, x: -30, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: 0.3 + i * 0.4,
+                ease: "easeOut"
+              }}
+            >
+              <motion.div 
+                className="mb-2"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.5 + i * 0.4 }}
+              >
                 <div className="text-yellow-400 font-semibold">
                   {period.period}
                 </div>
                 <div className="text-white text-xs">
                   {period.role} @ {period.team}
                 </div>
-              </div>
+              </motion.div>
               
-              <div className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2">
+              <motion.div 
+                className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.7 + i * 0.4 }}
+              >
                 {period.highlights.map((highlight, j) => (
-                  <div key={j} className="text-gray-300 py-0.5">
+                  <motion.div 
+                    key={j} 
+                    className="text-gray-300 py-0.5"
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      duration: 0.3, 
+                      delay: 0.8 + i * 0.4 + j * 0.1,
+                      ease: "easeOut"
+                    }}
+                  >
                     • {highlight}
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
 
           <div className="mt-6 pt-2 border-t border-gray-700">
@@ -202,31 +258,79 @@ export const commands = {
 
       return (
         <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
-          <div className="mb-4">
+          <motion.div 
+            className="mb-4"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+          >
             <div className="text-cyan-400 font-semibold">Achievements Report</div>
             <div className="text-gray-400 text-xs">Generated: {new Date().toISOString().split('T')[0]}</div>
-          </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
+            className="text-sm text-gray-400 mb-4"
+          >
+            Analyzing performance metrics...
+          </motion.div>
 
           {achievementsData.map((achievement, i) => (
-            <div key={i} className="mb-4">
-              <div className="text-yellow-400 font-semibold mb-1">
+            <motion.div 
+              key={i} 
+              className="mb-4"
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                delay: 0.5 + i * 0.2, 
+                duration: 0.4,
+                ease: "easeOut" 
+              }}
+            >
+              <motion.div 
+                className="text-yellow-400 font-semibold mb-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7 + i * 0.2, duration: 0.3 }}
+              >
                 {achievement.category}:
-              </div>
-              <div className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2">
+              </motion.div>
+              <motion.div 
+                className="bg-gray-950 p-3 border-l-2 border-yellow-500 ml-2"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.8 + i * 0.2, duration: 0.3 }}
+              >
                 {achievement.items.map((item, j) => (
-                  <div key={j} className="text-gray-300 py-0.5">
+                  <motion.div 
+                    key={j} 
+                    className="text-gray-300 py-0.5"
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      delay: 0.9 + i * 0.2 + j * 0.1,
+                      duration: 0.2
+                    }}
+                  >
                     • {item}
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
 
-          <div className="mt-4 pt-2 border-t border-gray-700">
+          <motion.div 
+            className="mt-4 pt-2 border-t border-gray-700"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 + achievementsData.length * 0.2, duration: 0.4 }}
+          >
             <div className="text-green-400 text-xs">
               ✓ Report generated successfully. Total categories: {achievementsData.length}
             </div>
-          </div>
+          </motion.div>
         </div>
       );
     },
@@ -244,46 +348,128 @@ export const commands = {
 
       return (
         <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
-          <div className="mb-4">
+          <motion.div 
+            className="mb-4"
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="text-cyan-400 font-semibold">Recommendation Report</div>
             <div className="text-gray-400 text-xs">Subject: 서광원 | Evaluator: 후배 개발자</div>
-          </div>
+          </motion.div>
 
-          <div className="mb-6">
-            <div className="text-white font-semibold mb-2">Executive Summary:</div>
-            <div className="bg-gray-950 p-3 border-l-2 border-cyan-500">
-              <div className="text-gray-300 leading-relaxed">
+          <motion.div 
+            className="mb-6"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <motion.div 
+              className="text-white font-semibold mb-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.3 }}
+            >
+              Executive Summary:
+            </motion.div>
+            <motion.div 
+              className="bg-gray-950 p-3 border-l-2 border-cyan-500"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.7, duration: 0.5 }}
+            >
+              <motion.div 
+                className="text-gray-300 leading-relaxed"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.0, duration: 0.8 }}
+              >
                 서광원 님은 제가 경험한 동료 중 최고의 커뮤니케이터이자 협업형 리더입니다.<br/>
                 수많은 동료들과 함께했지만, 커뮤니케이션과 협업 역량에서 서광원 님만큼 뛰어난 분은 없었습니다.<br/><br/>
                 선배님은 단순히 의견을 맞추는 수준을 넘어서, 이해관계가 다른 사람들까지 빠르게 한 방향으로 모아내는 힘이 있었습니다.
-              </div>
-            </div>
-          </div>
+              </motion.div>
+            </motion.div>
+          </motion.div>
 
-          <div className="mb-4">
+          <motion.div 
+            className="mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.3 }}
+          >
             <div className="text-white font-semibold mb-2">Core Competencies:</div>
-          </div>
+          </motion.div>
 
           {strengthsData.map((strength, i) => (
-            <div key={i} className="mb-4">
-              <div className="text-green-400 font-semibold mb-1">
+            <motion.div 
+              key={i} 
+              className="mb-4"
+              initial={{ opacity: 0, y: 15, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ 
+                delay: 1.7 + i * 0.15,
+                duration: 0.4,
+                ease: "easeOut"
+              }}
+            >
+              <motion.div 
+                className="text-green-400 font-semibold mb-1"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.8 + i * 0.15, duration: 0.3 }}
+              >
                 {strength.title}:
-              </div>
-              <div className="bg-gray-950 p-3 border-l-2 border-green-500 ml-2">
+              </motion.div>
+              <motion.div 
+                className="bg-gray-950 p-3 border-l-2 border-green-500 ml-2"
+                initial={{ opacity: 0, x: -15 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.9 + i * 0.15, duration: 0.3 }}
+              >
                 {strength.desc.map((desc, j) => (
-                  <div key={j} className="text-gray-300 py-0.5">
+                  <motion.div 
+                    key={j} 
+                    className="text-gray-300 py-0.5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ 
+                      delay: 2.0 + i * 0.15 + j * 0.08,
+                      duration: 0.3
+                    }}
+                  >
                     • {desc}
-                  </div>
+                  </motion.div>
                 ))}
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
 
-          <div className="mt-6 pt-2 border-t border-gray-700">
-            <div className="text-green-400 text-xs">
+          <motion.div 
+            className="mt-6 pt-2 border-t border-gray-700"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.5 + strengthsData.length * 0.15, duration: 0.5 }}
+          >
+            <motion.div 
+              className="text-green-400 text-xs"
+              animate={{ 
+                color: ["#22c55e", "#16a34a", "#15803d", "#22c55e"],
+                textShadow: [
+                  "0 0 0px #22c55e",
+                  "0 0 8px #22c55e", 
+                  "0 0 0px #22c55e"
+                ]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                ease: "easeInOut",
+                delay: 3.0 + strengthsData.length * 0.15
+              }}
+            >
               ✓ Recommendation: STRONGLY POSITIVE | Confidence: HIGH
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       );
     },

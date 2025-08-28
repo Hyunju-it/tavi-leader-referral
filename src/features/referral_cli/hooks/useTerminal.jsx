@@ -5,6 +5,7 @@ import { commands as COMMANDS } from '../constants/commands.jsx';
 import { devCommands } from '../constants/devCommands';
 import { secretCommands } from '../constants/secretCommands.jsx';
 import { availableFonts } from '../utils/fonts';
+import TypingEffect from '../components/TypingEffect';
 
 const allCommands = { ...COMMANDS, ...devCommands, ...secretCommands };
 const commandList = Object.keys(allCommands);
@@ -189,7 +190,7 @@ export const useTerminal = () => {
     if (output === "__IMPACT__") {
       const impactData = [
         "🚀 프로젝트 런칭 6회 → 신규 채널 확장, 매출 성장 견인",
-        "⚡ 성능 최적화 8건 → SQL/트래픽 튜닝으로 응답속도 최대 90% 단축",
+        "⚡ 성능 최적화 8건 → SQL/트래픽 튜닝으로 응답속도 최대 90% 단축", 
         "🤖 자동화·최적화 10건 → 운영 리소스 절감, 오류·재작업 방지",
         "💡 신규 기능 개발 7건 → Kakao·Tripbtoz 연동 등 서비스 확장",
         "🛠️ 프로세스 개선 12건 → 마감/취소/정산 로직 강화, 운영 효율화",
@@ -200,21 +201,69 @@ export const useTerminal = () => {
 
       const impactElement = (
         <div className="flex flex-col items-start py-6 w-full">
-          <span className="text-lg font-bold text-[#93c5fd] mb-6">💫 조직에 남긴 흔적들</span>
-          <div className="flex flex-col space-y-4">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-lg font-bold text-[#93c5fd] mb-6"
+          >
+            💫 조직에 남긴 흔적들
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.3 }}
+            className="text-sm text-gray-400 mb-4"
+          >
+            Loading impact records...
+          </motion.div>
+
+          <div className="flex flex-col space-y-2 w-full">
             {impactData.map((item, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.2 }}
-                className="flex items-center"
+                transition={{ 
+                  delay: 0.6 + i * 0.3,
+                  duration: 0.4,
+                  ease: "easeOut"
+                }}
+                className="flex items-start"
               >
-                <span className="text-lg">{item.split(' ')[0]}</span>
-                <span className="ml-4 text-[#d0cde1]">{item.substring(item.indexOf(' ') + 1)}</span>
+                <motion.span
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ 
+                    delay: 0.8 + i * 0.3,
+                    type: "spring",
+                    stiffness: 200
+                  }}
+                  className="text-lg mr-3"
+                >
+                  {item.split(' ')[0]}
+                </motion.span>
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.0 + i * 0.3 }}
+                  className="text-[#d0cde1] flex-1"
+                >
+                  {item.substring(item.indexOf(' ') + 1)}
+                </motion.span>
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 + impactData.length * 0.3 + 0.5 }}
+            className="text-xs text-gray-500 mt-6 pt-4 border-t border-gray-700"
+          >
+            ✓ Impact analysis complete. Total contributions: {impactData.length} major areas
+          </motion.div>
         </div>
       );
       setLines([`$ ${cmd}`, impactElement]);
