@@ -11,9 +11,39 @@ const commandList = Object.keys(allCommands);
 
 export const useTerminal = () => {
   const [lines, setLines] = useState([
-    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 to-pink-300">
-      ✧･ﾟ: *✧･ﾟ:* Welcome to Seo Gwang-won Referral Web CLI *:･ﾟ✧*:･ﾟ✧
-    </span>
+    <div className="space-y-6 py-6">
+      <div className="text-center">
+        <pre className="text-cyan-400 font-mono text-sm md:text-base leading-tight">
+{`████████╗ █████╗ ██╗   ██╗██╗
+╚══██╔══╝██╔══██╗██║   ██║██║
+   ██║   ███████║██║   ██║██║
+   ██║   ██╔══██║╚██╗ ██╔╝██║
+   ██║   ██║  ██║ ╚████╔╝ ██║
+   ╚═╝   ╚═╝  ╚═╝  ╚═══╝  ╚═╝`}
+        </pre>
+        <div className="text-gray-400 text-sm mt-2">
+          Seo Gwang-won Professional Reference System v1.0
+        </div>
+      </div>
+      
+      <div className="bg-gray-900 border-l-2 border-cyan-500 px-4 py-3 mx-2 md:mx-4">
+        <div className="text-green-400 font-semibold mb-2">System Status: ONLINE</div>
+        <div className="text-gray-300 text-sm space-y-1">
+          <div>• Available commands: {Object.keys(allCommands).length}</div>
+          <div>• Reference data: LOADED</div>
+          <div>• Career timeline: 2023.03 - 2024.08</div>
+        </div>
+      </div>
+      
+      <div className="text-center">
+        <div className="text-yellow-400 text-sm">
+          Type 'help' to see all available commands
+        </div>
+        <div className="text-gray-500 text-xs mt-1">
+          Press Tab for autocomplete
+        </div>
+      </div>
+    </div>
   ]);
   const [input, setInput] = useState('');
   const [typedOutput, setTypedOutput] = useState(null);
@@ -28,9 +58,9 @@ export const useTerminal = () => {
       const newFont = args[0];
       if (availableFonts.includes(newFont)) {
         setFont(newFont);
-        setLines([`✦ > ${cmd}`, `Font changed to ${newFont}`]);
+        setLines([`$ ${cmd}`, `Font changed to ${newFont}`]);
       } else {
-        setLines([`✦ > ${cmd}`, `Font not found: ${newFont}`]);
+        setLines([`$ ${cmd}`, `Font not found: ${newFont}`]);
       }
       return;
     }
@@ -54,7 +84,7 @@ export const useTerminal = () => {
       output = `Command not found: ${normalizedCmd}`;
     }
 
-    if (output === "__JOURNEY__") {
+    if (output === "__ABOUT__") {
       const journeyData = [
         { icon: "🌱", text: "시작과 탐색" },
         { icon: "🚀", text: "혁신과 도전" },
@@ -63,7 +93,7 @@ export const useTerminal = () => {
         { icon: "🌟", text: "성과와 성장" },
       ];
 
-      const journeyElement = (
+      const aboutElement = (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -95,7 +125,7 @@ export const useTerminal = () => {
             />
             
             <div className="flex justify-between items-center px-8">
-              {journeyData.map((stage, i) => (
+              {aboutData.map((stage, i) => (
                 <motion.div
                   key={i}
                   className="relative flex flex-col items-center z-10"
@@ -155,7 +185,7 @@ export const useTerminal = () => {
           </div>
         </motion.div>
       );
-      setLines([`✦ > ${cmd}`, journeyElement]);
+      setLines([`$ ${cmd}`, aboutElement]);
       return;
     }
 
@@ -190,11 +220,11 @@ export const useTerminal = () => {
           </div>
         </div>
       );
-      setLines([`✦ > ${cmd}`, impactElement]);
+      setLines([`$ ${cmd}`, impactElement]);
       return;
     }
 
-    setLines([`✦ > ${cmd}`, output]);
+    setLines([`$ ${cmd}`, output]);
   }, [setFont, setLines]);
 
   const handleTabCompletion = useCallback(() => {
@@ -206,7 +236,7 @@ export const useTerminal = () => {
     if (matchingCommands.length === 1) {
       setInput(matchingCommands[0]);
     } else if (matchingCommands.length > 1) {
-      setLines((prev) => [...prev, `✦ > ${currentInput}`, matchingCommands.join('  ')]);
+      setLines((prev) => [...prev, `$ ${currentInput}`, matchingCommands.join('  ')]);
     }
   }, [input, setLines]);
 

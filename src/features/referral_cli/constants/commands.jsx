@@ -49,22 +49,22 @@ export const commands = {
       );
     },
   },
-  journey: {
+  about: {
     description: "선배의 여정을 돌아봅니다.",
     execute: () => {
       const journeyData = [
         {
-          period: "2023.03 - 2024.08",
-          role: "백엔드 개발자",
-          team: "여행 플랫폼 서비스팀",
+          period: "서광원 팀장님 2016.?? - 2025.08.29",
+          role: "백엔드 개발자 / 팀장",
+          team: "호텔 CMS 개발팀",
           highlights: [
-            "신입으로 입사하여 복잡한 여행 도메인 빠르게 습득",
-            "기존 레거시 시스템 이해 및 점진적 개선 작업 참여",
+            "TideSquare CMS 프로젝트 리딩 / 전반적인 개발",
+            "신규 CMS 연동 / 신규 채널 구축 프로젝트 주도",
             "팀 내 협업 프로세스와 코드 리뷰 문화에 적응"
           ]
         },
         {
-          period: "2024.04 - 2024.08",
+          period: "이현주 2024.10 - 2025.08",
           role: "주니어 백엔드 개발자",
           team: "여행 플랫폼 서비스팀",
           highlights: [
@@ -78,7 +78,7 @@ export const commands = {
       return (
         <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
-            <div className="text-cyan-400 font-semibold">Career Journey Report</div>
+            <div className="text-cyan-400 font-semibold">Career About Report</div>
             <div className="text-gray-400 text-xs">Subject: 서광원 | Timeline: Professional Experience</div>
           </div>
 
@@ -105,7 +105,7 @@ export const commands = {
 
           <div className="mt-6 pt-2 border-t border-gray-700">
             <div className="text-cyan-400 text-xs">
-              ✓ Career progression documented. Total experience: 1.5+ years
+              ✓ Career progression documented. Total experience: 8+ years
             </div>
           </div>
         </div>
