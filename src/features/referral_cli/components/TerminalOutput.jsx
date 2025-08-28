@@ -18,7 +18,23 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
     }
   }, [lines.length, lineKeys.length]);
 
-  // 스크롤 자동 추적 해제
+  // 새 명령어 입력 시 맨 위로 스크롤
+  useEffect(() => {
+    if (outputRef.current && lines.length >= 2) {
+      // 배열의 첫 번째 요소가 명령어인지 확인 (setLines([`$ ${cmd}`, output]) 구조)
+      const firstLine = lines[0];
+      const isNewCommand = typeof firstLine === 'string' && firstLine.startsWith('$ ');
+
+      if (isNewCommand) {
+        // 명령어 실행 시 맨 위로 스크롤
+        setTimeout(() => {
+          if (outputRef.current) {
+            outputRef.current.scrollTop = 0;
+          }
+        }, 100);
+      }
+    }
+  }, [lines]);
 
   useEffect(() => {
     if (typedOutput) {
