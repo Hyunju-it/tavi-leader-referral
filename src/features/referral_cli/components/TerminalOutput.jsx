@@ -50,7 +50,7 @@ export default function TerminalOutput({ lines, typedOutput, setLines, setTypedO
                 </div>
               </div>
             ) : typeof line === 'string' ? (
-              <span style={{ whiteSpace: 'pre-wrap' }}>{line}</span>
+              <span className="md:ml-4" style={{ whiteSpace: 'pre-wrap' }}>{line}</span>
             ) : (
               line
             )}

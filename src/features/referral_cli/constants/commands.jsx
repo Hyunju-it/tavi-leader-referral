@@ -155,7 +155,7 @@ export const commands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-5xl mx-2 md:mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold">Business Impact Analysis</div>
             <div className="text-gray-400 text-xs">Subject: 서광원 | Period: 2023.03 - 2024.08</div>
@@ -201,7 +201,7 @@ export const commands = {
       ];
 
       return (
-        <div className="font-mono leading-relaxed max-w-5xl mx-2 md:mx-auto space-y-4">
+        <div className="font-mono leading-relaxed max-w-4xl mx-2 md:mx-auto space-y-4">
           <div className="mb-4">
             <div className="text-cyan-400 font-semibold">Achievements Report</div>
             <div className="text-gray-400 text-xs">Generated: {new Date().toISOString().split('T')[0]}</div>
